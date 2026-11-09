@@ -244,6 +244,12 @@ async function selectLab(id){
  document.title=lab.name+' | SR PHYSICS Laboratory';
 }
 $('labFrame').addEventListener('load',()=>{
+ const doc = $('labFrame').contentDocument;
+const logo = doc?.querySelector('.brand-logo');
+
+if (logo) {
+  logo.innerHTML = '<img src="https://srphysics.lk/logo1-mask.webp" style="width:100%;height:100%;object-fit:contain">';
+}
  frameLoaded=true;$('frameLoading').classList.add('hidden');sendChild('daylight');
  // The original simple-coil motor has its own five practical stages. Enter its
  // complete model immediately, preserving the built-in stage controls.

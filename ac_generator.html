@@ -1,0 +1,425 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#f1f7fa"><title>SR PHYSICS · 3D AC Generator · Slip-Ring Laboratory</title><style>
+:root{font-family:Inter,"Segoe UI",system-ui,-apple-system,sans-serif;color-scheme:light;--navy:#102e3c;--muted:#66818c;--teal:#0e8c9b;--border:#d3e3e8}*{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;overflow:hidden}body{background:#e9f1f4;color:var(--navy)}button,select,input{font:inherit}button{cursor:pointer}button:focus-visible,select:focus-visible,input:focus-visible{outline:2px solid #1dd3dc;outline-offset:2px}.app{height:100vh;height:100dvh;display:flex;flex-direction:column;overflow:hidden}.header{height:72px;flex:none;display:flex;justify-content:space-between;align-items:center;padding:0 clamp(12px,2.1vw,30px);gap:16px;background:#f9fdfdee;border-bottom:1px solid #d8e5e7;box-shadow:0 4px 24px #244b6512;z-index:9}.branding{display:flex;gap:11px;align-items:center;min-width:218px}.branding strong{display:block;font-size:15px;font-weight:950;letter-spacing:.14em}.branding small{display:block;font-size:9px;letter-spacing:.095em;color:#6e92a1;margin-top:5px;font-weight:800;white-space:nowrap}.mark{width:45px;height:45px;border-radius:13px;display:grid;place-items:center;background:#c8eeef;border:1px solid #9fd6db;overflow:hidden;flex:none}.mark img{width:100%;height:100%;object-fit:contain;display:none}.mark.success img{display:block}.mark.success span{display:none}.mark svg{display:block}.mark.success svg{display:none}.heading{flex:1;text-align:center;min-width:0}.heading strong{display:block;font-size:clamp(15px,1.45vw,20px);letter-spacing:-.035em}.heading small{font-size:11px;color:#77939e;display:block;margin-top:4px}.headerActions{display:flex;gap:8px;align-items:center}.uiButton,#language{height:39px;border-radius:11px;background:#f1f7f9;color:#245065;border:1px solid #cbdde3;padding:0 12px;font-size:12px;font-weight:800;white-space:nowrap}.uiButton:hover,.uiButton:active{background:#dff1f3}.uiButton.primary{background:#087f90;color:white;border-color:#087f90}.uiButton.square{width:39px;padding:0;font-size:19px}#language{min-width:84px}.workspace{flex:1;min-height:0;position:relative;overflow:hidden;background:radial-gradient(ellipse at 57% 44%,#f5fcfe,#dee9ea)}#scene{width:100%;height:100%;display:block;touch-action:none;cursor:grab;outline:none}#scene.dragging{cursor:grabbing}.ambient-label{position:absolute;left:20px;top:20px;padding:15px 18px;background:#091b2cd9;color:#fff;border:1px solid #ffffff31;box-shadow:0 15px 35px #0d24372c;backdrop-filter:blur(15px);border-radius:14px;pointer-events:none;max-width:310px}.ambient-label span{display:inline-flex;font-size:10px;font-weight:850;letter-spacing:.13em;color:#87e7e7;align-items:center;gap:7px}.liveDot{width:7px;height:7px;border-radius:100%;background:#5ff2d9;box-shadow:0 0 0 4px #5ff2d927}.ambient-label strong{display:block;font-size:14px;margin:8px 0 5px;letter-spacing:.01em}.ambient-label small{display:block;font-size:11px;line-height:1.5;color:#bbd3db}.status-chip{position:absolute;right:20px;top:18px;background:#102536de;color:#dcf4fa;box-shadow:0 12px 30px #12304421;border:1px solid #ffffff33;border-radius:10px;padding:10px 13px;font-size:10px;font-weight:850;letter-spacing:.08em;display:flex;align-items:center;gap:9px;pointer-events:none}.status-chip span:first-child{height:7px;width:7px;border-radius:50%;background:#4bddac}.status-chip.off span:first-child{background:#ff8a7b}.readings{position:absolute;left:20px;bottom:59px;background:#0a1a2bdc;box-shadow:0 15px 35px #1b394837;border:1px solid #ffffff36;backdrop-filter:blur(16px);display:flex;gap:0;max-width:calc(100% - 40px);border-radius:14px;padding:13px 8px;color:white;pointer-events:none}.read{min-width:105px;padding:0 15px;border-right:1px solid #ffffff2b}.read:last-child{border:0}.read small{display:block;font-size:9px;letter-spacing:.13em;color:#8fb6c6;font-weight:900}.read b{display:block;font-size:19px;line-height:1.2;margin-top:7px;font-variant-numeric:tabular-nums}.hudNote{position:absolute;right:20px;bottom:61px;background:#ffffffd9;border:1px solid #c8dce3;box-shadow:0 10px 35px #22445f18;padding:11px 16px;border-radius:12px;max-width:220px;pointer-events:none}.hudNote b{display:block;color:#175d70;font-size:13px}.hudNote small{display:block;font-size:10px;color:#668492;margin-top:5px;line-height:1.5}.cameraBar{position:absolute;bottom:14px;left:50%;transform:translateX(-50%);display:flex;align-items:center;gap:3px;padding:5px 9px;border:1px solid #ffffff77;background:#102737e8;backdrop-filter:blur(16px);border-radius:13px;box-shadow:0 8px 35px #173c5339}.cameraBar span{font-size:10px;color:#9ab8c5;font-weight:850;letter-spacing:.07em;padding:0 9px}.cameraBar button{border:0;padding:0 11px;height:31px;border-radius:8px;background:transparent;color:#cde6ec;font-size:11px;font-weight:800}.cameraBar button:hover,.cameraBar button.active{background:#0aa0ad;color:white}.cameraBar .vSep{padding:0;margin:4px 5px;width:1px;height:18px;background:#ffffff2f}.hintBar{position:absolute;bottom:7px;right:16px;font-size:10px;color:#567989;pointer-events:none}.screenLabel{position:absolute;font-size:9px;font-weight:950;letter-spacing:.08em;color:#184555;background:#ffffffe8;border:1px solid #a6cdd4;border-radius:7px;padding:5px 8px;box-shadow:0 5px 15px #234a5a16;pointer-events:none;white-space:nowrap}.toast{position:absolute;top:72px;left:50%;transform:translateX(-50%);padding:9px 15px;border-radius:10px;background:#132c3ee7;color:white;font-weight:700;font-size:12px;opacity:0;transition:opacity .2s;pointer-events:none;z-index:19}.toast.show{opacity:1}.darken{position:absolute;inset:0;opacity:0;pointer-events:none;background:#0d263b5c;transition:opacity .25s;z-index:10}.darken.open{opacity:1;pointer-events:auto}.drawer{position:absolute;right:0;top:0;bottom:0;width:min(360px,94vw);background:#fafdfe;box-shadow:-15px 0 40px #08283c33;transform:translateX(102%);transition:transform .24s cubic-bezier(.2,.8,.2,1);z-index:11;display:flex;flex-direction:column}.drawer.open{transform:none}.drawerHead{padding:19px 18px 17px;border-bottom:1px solid #dce8ec;display:flex;align-items:center;justify-content:space-between}.drawerHead h2{margin:5px 0 0;font-size:20px}.eyebrow{font-size:10px;color:#0a92a1;letter-spacing:.12em;font-weight:900}.drawerScroll{overflow:auto;flex:1}.panelSection{padding:18px 20px 22px;border-bottom:1px solid #dce9ed}.panelSection h3{margin:0 0 14px;font-size:14px}.pair{display:flex;gap:8px;margin-top:14px}.pair>*{flex:1;font-size:11px;padding:0 8px}.sliderRow{margin-top:19px}.sliderRow label{display:flex;justify-content:space-between;align-items:center;font-size:11px;font-weight:750;gap:8px}.sliderRow output{color:#088395;font-size:12px;font-weight:950;white-space:nowrap}.sliderRow input{margin:12px 0 0;width:100%;accent-color:#058899}.note{font-size:11px;line-height:1.55;color:#607f8c;margin:12px 0 0}.toggleLine{display:flex;align-items:center;justify-content:space-between;margin:13px 0;gap:10px;font-size:11px;font-weight:760}.toggleLine input{width:17px;height:17px;accent-color:#09889c}.eqbox{border:1px solid #d4e5eb;background:#f1f9fc;border-radius:11px;padding:15px;font-size:15px;font-weight:750;color:#236679}.eqbox hr{border:0;border-top:1px solid #cddfe5;margin:10px 0}.probeList{font-size:12px;color:#1d5e73;margin-top:14px;line-height:1.8}.context{display:none;position:absolute;z-index:22;width:180px;border-radius:12px;padding:10px;background:#102c40f0;border:1px solid #ffffff3b;box-shadow:0 15px 45px #0d283847;color:white;backdrop-filter:blur(13px)}.context.visible{display:flex;flex-direction:column;gap:5px}.context strong{font-size:13px;padding:6px 8px}.context button{text-align:left;border:0;background:#ffffff12;padding:8px 11px;border-radius:8px;color:white;font-weight:760;font-size:11px}.context button:hover{background:#ffffff35}@media(max-width:950px){.header{height:58px;padding:0 10px;gap:5px}.branding{min-width:0;gap:6px}.mark{width:35px;height:35px;border-radius:10px}.branding strong{font-size:11px}.branding small{font-size:7px;max-width:130px;white-space:normal}.heading{display:none}.headerActions{gap:5px}.uiButton{height:34px;padding:0 9px;font-size:11px}.uiButton.square{width:34px}.ambient-label{left:8px;top:9px;padding:10px;max-width:200px}.ambient-label strong{font-size:11px}.ambient-label small{font-size:9px}.status-chip{top:8px;right:8px;padding:7px;font-size:9px}.readings{left:8px;bottom:53px;padding:9px 3px}.read{min-width:65px;padding:0 9px}.read small{font-size:7px}.read b{font-size:14px;margin-top:4px}.hudNote{right:8px;bottom:53px;max-width:135px;padding:7px}.hudNote b{font-size:11px}.hudNote small{font-size:8px}.cameraBar{bottom:7px;padding:4px 5px}.cameraBar button{height:27px;padding:0 7px;font-size:10px}.cameraBar span{font-size:8px;padding:0 4px}.hintBar{display:none}.screenLabel{font-size:7px;padding:3px 5px}}@media(max-width:620px){.branding small{display:none}.headerActions .uiButton span{display:none}#language{min-width:65px;padding:0 3px;font-size:10px}.readings{bottom:45px}.read{min-width:0;padding:0 6px}.read b{font-size:12px}.read small{font-size:6px}.hudNote{display:none}.ambient-label small{display:none}.cameraBar .vSep,.cameraBar span{display:none}.screenLabel{display:none}}@media(max-height:490px){.ambient-label{padding:7px}.ambient-label small{display:none}.readings{bottom:42px;padding:6px}.cameraBar{bottom:4px}.hudNote{bottom:45px}.screenLabel{display:none}} 
+
+.powerScreen{position:absolute;pointer-events:none;z-index:3;text-align:center;background:#091c22;border:1px solid #66838b;border-radius:3px;box-shadow:0 0 10px #083b273b;padding:2px 4px;color:#65f4a2;font-weight:800;min-width:64px;line-height:1.1;transform:translate(-50%,-50%)}.powerScreen span{display:block;font-size:6px;letter-spacing:.15em;color:#529c8f}.powerScreen strong{display:block;font-size:9px;margin-top:2px;white-space:nowrap}@media(max-width:660px){.powerScreen{transform:translate(-50%,-50%) scale(.8)}}
+/* Magnetic-field lab additions */
+#fluxCanvas{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:1}
+#fieldLabels{position:absolute;inset:0;pointer-events:none;z-index:2;overflow:hidden}
+.ambient-label,.readings,.hudNote,.status-chip,.cameraBar,.hintBar,.toast{z-index:3}
+.magnetButtons{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:7px;margin-top:14px}
+.addType{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;padding:12px 4px;background:#eef7f8;border:1px solid #c9dee5;color:#17586a;border-radius:11px;min-height:78px;font-size:10px;font-weight:800}
+.addType b{font-size:25px;color:#0b8495;line-height:1}.addType:hover,.presetGrid button:hover{border-color:#0aa2b3;background:#e1f4f5}
+.presetGrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.presetGrid button{border-radius:10px;border:1px solid #cbdfe5;background:#f2f8fa;padding:10px 4px;color:#245568;font-size:11px;font-weight:800}
+.context{width:247px;max-height:min(470px,88dvh);overflow:auto}.contextMagnet label{display:flex;justify-content:space-between;font-size:10px;margin:8px 4px 2px;color:#c5e2eb}.contextMagnet input{width:100%;accent-color:#33c4d3;min-height:27px}.contextMagnet button,.contextEmpty button,.contextCompass button{width:100%;margin:2px 0}.context [hidden]{display:none!important}
+.field-mark{position:absolute;border-radius:6px;padding:3px 5px;font-size:9px;font-weight:950;line-height:1;letter-spacing:.07em;transform:translate(-50%,-50%);background:#fffffff0;box-shadow:0 2px 7px #0a263d31;border:1px solid #cce0e8;color:#214d60}.field-mark.north{color:#df385a}.field-mark.south{color:#3278d1}.field-mark.probe{color:#0f8094}.field-mark.selected{outline:2px solid #19c0cb}
+@media(max-width:950px){.magnetButtons{grid-template-columns:repeat(3,minmax(0,1fr))}.read{min-width:70px}.headerActions #addBtn{padding:0 7px}}
+@media(max-width:620px){.headerActions #addBtn span{display:none}.headerActions #addBtn{font-size:20px}.readings{left:7px;right:auto;bottom:44px}.read{min-width:0;padding:0 7px}.status-chip{max-width:155px}.field-mark{font-size:7px;padding:2px 4px}}
+@media(max-height:490px){.readings{bottom:40px}.read{padding:0 6px}.read small{font-size:7px}.read b{font-size:13px}.ambient-label{max-width:180px}.cameraBar{z-index:5}}
+/* Simple motor 3D experiment */
+#effectsCanvas{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:1}#apparatusLabels{position:absolute;inset:0;pointer-events:none;z-index:2}.ambient-label,.status-chip,.readings,.hudNote,.cameraBar,.hintBar,.toast{z-index:3}.read{min-width:113px} .modeBtns{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px;margin-top:12px}.modeBtns button{font-size:10px;line-height:1.3;padding:9px 4px;border:1px solid #c5dbe4;border-radius:9px;color:#226073;background:#edf7fa;font-weight:760}.modeBtns button.active{background:#06899b;color:white;border-color:#06899b}.context{width:205px}.context #contextButtons{display:grid;gap:5px}.context #contextButtons button{width:100%;text-align:left}.label3d{position:absolute;transform:translate(-50%,-50%);white-space:nowrap;font-size:10px;font-weight:850;padding:4px 7px;border-radius:7px;background:#fffc;border:1px solid #9bced7;box-shadow:0 2px 8px #194b6628;color:#1b5467}.label3d.positive{color:#c8354a}.label3d.negative{color:#1d6faf}.label3d.magnet{color:#b74747}.contactGlow{color:#10e69b}.running .status-chip span:first-child{background:#4de7b4}
+@media(max-width:950px){.read{min-width:76px}.read b{font-size:14px}}@media(max-width:620px){.read{min-width:0;padding:0 6px}.read b{font-size:12px}.modeBtns{grid-template-columns:repeat(3,minmax(0,1fr))}}@media(max-height:490px){.read b{font-size:12px}} 
+
+/* Split-ring lesson panel */
+.contactCard{background:linear-gradient(150deg,#f5fcfc,#e6f0f5);border:1px solid #cbdfe7;border-radius:14px;padding:9px;text-align:center;margin:12px 0 6px;box-shadow:inset 0 1px #fff}
+.contactArtwork{height:126px;overflow:hidden;display:grid;place-items:center}.contactArtwork svg{height:125px;width:100%;max-width:290px}
+.contactCard strong{display:block;color:#16546a;font-size:13px;margin-top:3px}.contactCard small{display:block;color:#5c8190;font-size:12px;margin:7px 0;font-weight:720}
+@media(max-width:950px){.read{min-width:68px;padding:0 7px}.read b{font-size:13px}}
+
+/* Generator-specific oscilloscope and subdued dark glass */
+.wavePanel{position:absolute;right:18px;bottom:115px;width:min(310px,30vw);height:156px;background:rgba(9,27,40,.88);color:#e9fbff;box-shadow:0 15px 40px #15313c34;border:1px solid #ffffff33;backdrop-filter:blur(12px);border-radius:14px;padding:10px 12px 8px;pointer-events:none}
+.wavePanel header{display:flex;align-items:center;justify-content:space-between;font-size:10px;letter-spacing:.10em;font-weight:850;color:#a9d0da;margin-bottom:2px}.wavePanel b{font-size:12px;color:#70e4d9}.wavePanel canvas{display:block;width:100%;height:112px}
+.generatorBadge{font-size:11px;color:#d9fafb;font-weight:850;background:#117d8b73;padding:5px 7px;border-radius:8px;margin-left:6px}
+@media(max-width:950px){.wavePanel{width:220px;height:118px;right:8px;bottom:106px;padding:7px 8px}.wavePanel canvas{height:83px}.wavePanel header{font-size:8px}.wavePanel b{font-size:10px}}
+@media(max-width:650px){.wavePanel{width:175px;height:103px;right:6px;bottom:96px}.wavePanel canvas{height:68px}.ambient-label{max-width:175px}.readings{flex-wrap:nowrap}.read{min-width:57px;padding:0 5px}.read b{font-size:12px}}
+@media(max-height:490px){.wavePanel{height:94px;bottom:43px;width:190px}.wavePanel canvas{height:64px}.wavePanel header{font-size:8px}.readings{bottom:42px}.hudNote{display:none}}
+
+/* Keep physics note distinct from the live oscilloscope */
+@media(min-width:951px){.hudNote{bottom:290px;right:20px;max-width:230px}}
+@media(max-width:950px){.hudNote{display:none}}
+
+</style></head><body><div class="app" id="app">
+<header class="header"><div class="branding"><div class="mark" id="brandMark"><img id="brandImg" src="https://srphysics.lk/logo1-mask.webp" alt="SR PHYSICS"><svg width="29" height="29" viewBox="0 0 32 32" aria-hidden="true"><path d="M10 7v12a6 6 0 0012 0V7" fill="none" stroke="#0a7287" stroke-width="5" stroke-linecap="round"/><path d="M8 7h5M19 7h5" stroke="#ed566b" stroke-width="4"/></svg></div><div><strong>SR PHYSICS</strong><small>NEXT GEN PHYSICS · SHAMIL RATHNAYAKE</small></div></div>
+<div class="heading"><strong id="pageTitle">3D AC Generator · Slip-Ring Experiment</strong><small id="pageSub">Rotating coil · two continuous slip rings · real-time AC</small></div>
+<div class="headerActions"><button class="uiButton primary" id="powerBtn"><span id="powerText">⏸ Stop drive</span></button><button class="uiButton" id="controlsBtn">☷ <span data-i="controls">Controls</span></button><select id="language" aria-label="Language"><option value="en">English</option><option value="si">සිංහල</option></select><button class="uiButton square" id="fullscreenBtn" title="Fullscreen">⛶</button></div></header>
+<main class="workspace" id="workspace"><canvas id="scene" aria-label="Realistic interactive 3D AC generator with two bar magnets, rotating coil, two complete slip rings, fixed brush contacts, mechanical drive, galvanometer and connected output circuit"></canvas><canvas id="effectsCanvas" aria-hidden="true" style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none"></canvas><div id="apparatusLabels" aria-hidden="true" style="position:absolute;inset:0;pointer-events:none"></div>
+<div class="ambient-label"><span><i class="liveDot"></i><span data-i="live">LIVE 3D LABORATORY</span></span><strong id="expName">AC GENERATOR · SLIP RINGS</strong><small id="instruction">Mechanical rotation creates alternating EMF and current</small></div>
+<div class="status-chip" id="statusChip"><span></span><span id="statusText">DRIVE ON · LOAD CONNECTED</span></div>
+<div class="readings"><div class="read"><small data-i="emf">INDUCED EMF</small><b id="emfOut">+0.00 V</b></div><div class="read"><small data-i="current">OUTPUT CURRENT</small><b id="currentOut">+0.00 A</b></div><div class="read"><small data-i="rms">RMS VOLTAGE</small><b id="rmsOut">0.00 V</b></div><div class="read"><small data-i="frequency">FREQUENCY</small><b id="frequencyOut">4.00 Hz</b></div></div>
+<div class="hudNote"><b id="formula">ε = NBAω sin θ</b><small id="physicsNote">Φ = NBA cos θ · two intact slip rings</small></div>
+<div class="wavePanel"><header><span id="waveTitle">OSCILLOSCOPE · EMF</span><b id="waveLabel">~ AC</b></header><canvas id="waveCanvas" aria-label="One cycle of AC voltage plotted against coil angle"></canvas></div>
+<div class="cameraBar"><span data-i="camera">CAMERA</span><button data-view="front">Front</button><button data-view="top">Top</button><button data-view="left">Left</button><button data-view="right">Right</button><button data-view="iso" class="active">3D</button><span class="vSep"></span><button id="zoomOut" title="Zoom out">−</button><button id="zoomIn" title="Zoom in">+</button><button id="resetCam" title="Reset camera">⟲</button><button id="captureBtn" title="Save PNG">⇩</button></div>
+<div class="hintBar">Drag to orbit · Pinch/wheel to zoom · Long-press apparatus for actions</div><div class="toast" id="toast"></div>
+<div class="darken" id="drawerShade"></div><aside class="drawer" id="drawer"><div class="drawerHead"><div><small class="eyebrow" data-i="panelTag">EXPERIMENT 08 · AC GENERATOR</small><h2 data-i="panelTitle">Generator controls</h2></div><button class="uiButton square" id="closeDrawer" aria-label="Close controls">✕</button></div><div class="drawerScroll">
+<div class="panelSection"><h3 data-i="operation">Run the generator</h3><div class="pair"><button class="uiButton primary" id="driveBtn">⏸ Stop mechanical drive</button><button class="uiButton" id="resetAngleBtn">↺ Reset coil angle</button></div><div class="pair"><button class="uiButton" id="pauseBtn">Ⅱ Pause simulation</button><button class="uiButton" id="stepBtn">▶ Step 30°</button></div><div class="pair"><button class="uiButton" id="reverseBtn">⇄ Reverse rotation</button><button class="uiButton" id="reverseFieldBtn">⇄ Reverse N/S poles</button></div><p class="note" id="statusHelp">The coil is turned by a mechanical drive, not a battery. Slip rings maintain uninterrupted contacts as induced EMF alternates.</p></div>
+<div class="panelSection"><h3 data-i="electrical">Generator parameters</h3>
+<div class="sliderRow"><label for="rpm"><span data-i="rpm">Mechanical rotation speed</span><output id="rpmValue">240 rpm</output></label><input id="rpm" type="range" min="0" max="600" step="10" value="240"></div>
+<div class="sliderRow"><label for="turns"><span data-i="turns">Coil turns, N</span><output id="turnsValue">120</output></label><input id="turns" type="range" min="10" max="240" step="10" value="120"></div>
+<div class="sliderRow"><label for="field"><span data-i="field">Magnetic flux density, B</span><output id="fieldValue">0.20 T</output></label><input id="field" type="range" min="0.02" max="0.50" step="0.01" value="0.20"></div>
+<div class="sliderRow"><label for="area"><span data-i="area">Coil area, A</span><output id="areaValue">0.018 m²</output></label><input id="area" type="range" min="0.005" max="0.030" step="0.001" value="0.018"></div>
+<div class="sliderRow"><label for="resistance"><span data-i="resistance">External load resistance</span><output id="resistanceValue">24 Ω</output></label><input id="resistance" type="range" min="4" max="100" step="1" value="24"></div>
+<div class="sliderRow"><label for="internal"><span data-i="internal">Coil internal resistance</span><output id="internalValue">2 Ω</output></label><input id="internal" type="range" min="0.5" max="12" step="0.5" value="2"></div>
+<div class="sliderRow"><label for="distance"><span data-i="distance">Magnet gap (qualitative)</span><output id="distanceValue">4.0 cm</output></label><input id="distance" type="range" min="2" max="10" step="0.5" value="4"></div>
+<div class="sliderRow"><label for="speed"><span data-i="speed">Playback speed</span><output id="speedValue">1.0×</output></label><input id="speed" type="range" min="0.2" max="2" step="0.1" value="1"></div></div>
+<div class="panelSection"><h3 data-i="output">Slip rings &amp; electrical output</h3><div class="contactCard"><div class="contactArtwork"><svg viewBox="0 0 300 145" role="img" aria-label="Two complete slip rings A1 and A2, each contacted by a separate brush B1 or B2"><rect x="35" y="59" width="230" height="25" rx="9" fill="#345767"/><g fill="none" stroke-width="17"><ellipse cx="103" cy="72" rx="27" ry="44" stroke="#d88947"/><ellipse cx="204" cy="72" rx="27" ry="44" stroke="#dfaa50"/></g><path d="M103 27V3 M204 27V3" stroke="#333d45" stroke-width="13" stroke-linecap="round"/><g fill="#174d68" font-size="11" font-weight="900"><text x="85" y="139">A₁ / B₁</text><text x="186" y="139">A₂ / B₂</text></g></svg></div><strong id="brushStatus">B₁ ↔ A₁ · B₂ ↔ A₂</strong><small id="coilStatus">Permanent ring contacts · no commutation</small></div>
+<label class="toggleLine"><span data-i="loadConnect">Connect external load / galvanometer</span><input id="loadConnected" type="checkbox" checked></label><div class="pair"><button class="uiButton" id="noLoadBtn">Open output circuit</button><button class="uiButton" id="shortPresetBtn">Preset: 300 rpm</button></div><p class="note" id="contactExplain">Each coil end connects to its own complete copper ring. The fixed brushes do not exchange connections. Polarity and current reverse naturally every half-turn of the coil.</p></div>
+<div class="panelSection"><h3 data-i="apparatus">3D apparatus &amp; presentation</h3><label class="toggleLine"><span data-i="showMagnets">Two bar magnets, N facing S</span><input id="magnetInstalled" type="checkbox" checked></label><label class="toggleLine"><span data-i="showCurrent">Animated current particles</span><input id="showCurrent" type="checkbox" checked></label><label class="toggleLine"><span data-i="showField">Magnetic field arrows</span><input id="showField" type="checkbox" checked></label><label class="toggleLine"><span data-i="showLabels">Apparatus labels</span><input id="showLabels" type="checkbox" checked></label><label class="toggleLine"><span data-i="showShadows">Contact shadows</span><input id="showShadows" type="checkbox" checked></label><div class="pair"><button class="uiButton" id="resetBtn">↺ Reset experiment</button><button class="uiButton" id="exportBtn">⇩ Export PNG</button></div></div>
+<div class="panelSection"><h3 data-i="physics">Physics &amp; observations</h3><div class="eqbox"><strong>Φ = NBA cos θ</strong><hr><strong>ε = NBAω sin θ</strong><hr><div id="calcDetails"></div></div><p class="note">Here θ is the angle between the coil’s area normal and the magnetic field. The ideal generator is driven at a selected constant angular speed. Output current is ε/(R<sub>load</sub> + R<sub>internal</sub>) when connected. The electrical load creates an opposing reaction torque; the external mechanical drive supplies the required energy. Idealized dimensions and uniform gap-field approximation.</p></div>
+</div></aside>
+<div class="context" id="context"><strong>Generator apparatus</strong><button data-action="drive">⏯ Mechanical drive</button><button data-action="load">⊙ Connect/disconnect load</button><button data-action="reverse">⇄ Reverse rotation</button><button data-action="magnet">▣ Add/remove magnets</button><button data-action="controls">☷ Open controls</button><button id="ctxClose">✕ Close</button></div>
+</main></div><script>
+/* Native WebGL2 miniature 3D engine. No Three.js, no remote dependency. */
+(function(){'use strict';
+const SR=window.SR3D={};
+const V=(x=0,y=0,z=0)=>[x,y,z];
+const add=(a,b)=>[a[0]+b[0],a[1]+b[1],a[2]+b[2]], sub=(a,b)=>[a[0]-b[0],a[1]-b[1],a[2]-b[2]],scale=(a,s)=>[a[0]*s,a[1]*s,a[2]*s], dot=(a,b)=>a[0]*b[0]+a[1]*b[1]+a[2]*b[2],cross=(a,b)=>[a[1]*b[2]-a[2]*b[1],a[2]*b[0]-a[0]*b[2],a[0]*b[1]-a[1]*b[0]],norm=a=>Math.sqrt(dot(a,a)),unit=a=>scale(a,1/(norm(a)||1));
+const I=()=>[1,0,0,0, 0,1,0,0, 0,0,1,0, 0,0,0,1];
+function multiply(a,b){let o=new Float32Array(16);for(let c=0;c<4;c++)for(let r=0;r<4;r++)o[c*4+r]=a[r]*b[c*4]+a[4+r]*b[c*4+1]+a[8+r]*b[c*4+2]+a[12+r]*b[c*4+3];return o;}
+function translation(x,y,z){let a=I();a[12]=x;a[13]=y;a[14]=z;return a;}
+function rotationY(a){let c=Math.cos(a),s=Math.sin(a);return [c,0,-s,0, 0,1,0,0, s,0,c,0, 0,0,0,1];}
+function rotationZ(a){let c=Math.cos(a),s=Math.sin(a);return [c,s,0,0,-s,c,0,0,0,0,1,0,0,0,0,1];}
+function rotationX(a){let c=Math.cos(a),s=Math.sin(a);return [1,0,0,0,0,c,s,0,0,-s,c,0,0,0,0,1];}
+function scaling(x,y,z){return [x,0,0,0,0,y,0,0,0,0,z,0,0,0,0,1];}
+function perspective(fov,aspect,near,far){let f=1/Math.tan(fov/2),q=1/(near-far);return [f/aspect,0,0,0,0,f,0,0,0,0,(near+far)*q,-1,0,0,2*near*far*q,0];}
+function lookAt(eye,target,up=[0,1,0]){let z=unit(sub(eye,target)),x=unit(cross(up,z)),y=cross(z,x);return [x[0],y[0],z[0],0,x[1],y[1],z[1],0,x[2],y[2],z[2],0,-dot(x,eye),-dot(y,eye),-dot(z,eye),1];}
+function project(p,vp,w,h){let x=p[0],y=p[1],z=p[2],d=vp[3]*x+vp[7]*y+vp[11]*z+vp[15];if(d<=0)return null;return {x:(1+(vp[0]*x+vp[4]*y+vp[8]*z+vp[12])/d)*w/2,y:(1-(vp[1]*x+vp[5]*y+vp[9]*z+vp[13])/d)*h/2,depth:d};}
+function buffer(){return {p:[],n:[],i:[]};}
+function vertex(b,pos,n){let i=b.p.length/3;b.p.push(...pos);b.n.push(...n);return i;}
+function tri(b,a,c,d){b.i.push(a,c,d);}
+function quad(b,p0,p1,p2,p3){let n=unit(cross(sub(p1,p0),sub(p2,p0))),a=vertex(b,p0,n),c=vertex(b,p1,n),d=vertex(b,p2,n),e=vertex(b,p3,n);tri(b,a,c,d);tri(b,a,d,e);}
+function box(w,h,d){let b=buffer(),x=w/2,y=h/2,z=d/2;quad(b,[-x,-y,z],[x,-y,z],[x,y,z],[-x,y,z]);quad(b,[x,-y,-z],[-x,-y,-z],[-x,y,-z],[x,y,-z]);quad(b,[x,-y,z],[x,-y,-z],[x,y,-z],[x,y,z]);quad(b,[-x,-y,-z],[-x,-y,z],[-x,y,z],[-x,y,-z]);quad(b,[-x,y,z],[x,y,z],[x,y,-z],[-x,y,-z]);quad(b,[-x,-y,-z],[x,-y,-z],[x,-y,z],[-x,-y,z]);return b;}
+function cylinder(r,h,s=24,cap=true){let b=buffer(),y=h/2;for(let i=0;i<=s;i++){let a=i/s*Math.PI*2,x=Math.cos(a)*r,z=Math.sin(a)*r,n=unit([x,0,z]);vertex(b,[x,-y,z],n);vertex(b,[x,y,z],n);}for(let i=0;i<s;i++){let j=i*2;tri(b,j,j+1,j+2);tri(b,j+1,j+3,j+2);}if(cap){let t=vertex(b,[0,y,0],[0,1,0]),bt=vertex(b,[0,-y,0],[0,-1,0]);for(let i=0;i<s;i++){let a=i/s*2*Math.PI,c=(i+1)/s*2*Math.PI;let v=vertex(b,[Math.cos(a)*r,y,Math.sin(a)*r],[0,1,0]),w=vertex(b,[Math.cos(c)*r,y,Math.sin(c)*r],[0,1,0]);tri(b,t,v,w);let vv=vertex(b,[Math.cos(a)*r,-y,Math.sin(a)*r],[0,-1,0]),ww=vertex(b,[Math.cos(c)*r,-y,Math.sin(c)*r],[0,-1,0]);tri(b,bt,ww,vv);}}return b;}
+function cone(r,h,s=24){let b=buffer(),y=h/2;for(let i=0;i<s;i++){let a=i/s*2*Math.PI,c=(i+1)/s*2*Math.PI;let p=[Math.cos(a)*r,-y,Math.sin(a)*r],q=[Math.cos(c)*r,-y,Math.sin(c)*r];let n=unit(cross(sub(q,p),sub([0,y,0],p))),i1=vertex(b,p,n),i2=vertex(b,q,n),i3=vertex(b,[0,y,0],n);tri(b,i1,i3,i2);}return b;}
+function torus(major,minor,steps=48,sides=10){let b=buffer();for(let i=0;i<=steps;i++){let a=i/steps*2*Math.PI,C=Math.cos(a),S=Math.sin(a);for(let j=0;j<=sides;j++){let t=j/sides*2*Math.PI,rr=major+minor*Math.cos(t),n=[C*Math.cos(t),Math.sin(t),S*Math.cos(t)];vertex(b,[rr*C,minor*Math.sin(t),rr*S],n);}}for(let i=0;i<steps;i++)for(let j=0;j<sides;j++){let k=i*(sides+1)+j;tri(b,k,k+1,k+sides+1);tri(b,k+1,k+sides+2,k+sides+1);}return b;}
+function sphere(r=1,lat=12,lon=18){let b=buffer();for(let i=0;i<=lat;i++){let th=i/lat*Math.PI;for(let j=0;j<=lon;j++){let ph=j/lon*2*Math.PI,n=[Math.sin(th)*Math.cos(ph),Math.cos(th),Math.sin(th)*Math.sin(ph)];vertex(b,scale(n,r),n);}}for(let i=0;i<lat;i++)for(let j=0;j<lon;j++){let q=i*(lon+1)+j;tri(b,q,q+1,q+lon+1);tri(b,q+1,q+lon+2,q+lon+1);}return b;}
+function line(points,r=.02,sides=9){const b=buffer();for(let i=0;i<points.length;i++){let tangent=unit(sub(points[Math.min(i+1,points.length-1)],points[Math.max(i-1,0)])),other=unit(cross(tangent,[0,1,0]));if(norm(other)<.05)other=unit(cross(tangent,[1,0,0]));let u=cross(tangent,other);for(let j=0;j<=sides;j++){let a=j/sides*Math.PI*2,n=add(scale(other,Math.cos(a)),scale(u,Math.sin(a)));vertex(b,add(points[i],scale(n,r)),n);}}for(let i=0;i<points.length-1;i++)for(let j=0;j<sides;j++){let k=i*(sides+1)+j;tri(b,k,k+1,k+sides+1);tri(b,k+1,k+sides+2,k+sides+1);}return b;}
+function smoothPath(anchors,subdiv=9){let out=[];for(let i=0;i<anchors.length-1;i++){const a=anchors[Math.max(i-1,0)],b=anchors[i],c=anchors[i+1],d=anchors[Math.min(i+2,anchors.length-1)];for(let t=0;t<subdiv;t++){let u=t/subdiv,u2=u*u,u3=u*u2;out.push([0,1,2].map(j=>.5*((2*b[j])+(-a[j]+c[j])*u+(2*a[j]-5*b[j]+4*c[j]-d[j])*u2+(-a[j]+3*b[j]-3*c[j]+d[j])*u3)));}}out.push(anchors[anchors.length-1]);return out;}
+function placeBetween(a,b){let v=sub(b,a),y=unit(v),x=unit(cross([0,0,1],y));if(norm(x)<.001)x=[1,0,0];let z=cross(x,y);return {matrix:[x[0],x[1],x[2],0, y[0],y[1],y[2],0, z[0],z[1],z[2],0, (a[0]+b[0])/2,(a[1]+b[1])/2,(a[2]+b[2])/2,1], length:norm(v)};}
+const vs=`#version 300 es\nprecision highp float;in vec3 aPosition;in vec3 aNormal;uniform mat4 uModel;uniform mat4 uVP;out vec3 vNormal;out vec3 vWorld;void main(){vec4 p=uModel*vec4(aPosition,1.0);vWorld=p.xyz;vNormal=mat3(uModel)*aNormal;gl_Position=uVP*p;}`;
+const fs=`#version 300 es\nprecision highp float;in vec3 vNormal;in vec3 vWorld;uniform vec4 uColor;uniform vec3 uCamera;uniform float uEmissive;out vec4 color;void main(){vec3 n=normalize(vNormal);vec3 l=normalize(vec3(-.47,.92,.56));float lit=max(dot(n,l),0.0);vec3 v=normalize(uCamera-vWorld),h=normalize(l+v);float spec=pow(max(dot(n,h),0.0),32.0)*.27;vec3 base=uColor.rgb*(.42+lit*.65)+vec3(spec)+uColor.rgb*uEmissive;float dist=length(vWorld-uCamera);base=mix(base,vec3(.91,.95,.96),clamp((dist-18.)/80.,0.,.20));color=vec4(pow(base,vec3(.91)),uColor.a);}`;
+function compile(gl,type,source){let s=gl.createShader(type);gl.shaderSource(s,source);gl.compileShader(s);if(!gl.getShaderParameter(s,gl.COMPILE_STATUS))throw Error(gl.getShaderInfoLog(s));return s;}
+class Engine{constructor(canvas){this.canvas=canvas;const gl=canvas.getContext('webgl2',{antialias:true,alpha:false,preserveDrawingBuffer:true,powerPreference:'high-performance'});this.software=!gl;this.gl=gl;if(this.software){this.ctx=canvas.getContext('2d');this.parts=[];this.meshes=new Map();this.yaw=.57;this.pitch=.57;this.radius=12.5;this.target=[0,.48,0];this.dpr=1;this.eye=[7,7,10];this.vp=I();return;}let program=gl.createProgram();gl.attachShader(program,compile(gl,gl.VERTEX_SHADER,vs));gl.attachShader(program,compile(gl,gl.FRAGMENT_SHADER,fs));gl.linkProgram(program);if(!gl.getProgramParameter(program,gl.LINK_STATUS))throw Error(gl.getProgramInfoLog(program));this.program=program;this.attr={p:gl.getAttribLocation(program,'aPosition'),n:gl.getAttribLocation(program,'aNormal')};this.uvp=gl.getUniformLocation(program,'uVP');this.um=gl.getUniformLocation(program,'uModel');this.uc=gl.getUniformLocation(program,'uColor');this.ue=gl.getUniformLocation(program,'uEmissive');this.ucam=gl.getUniformLocation(program,'uCamera');this.parts=[];this.meshes=new Map();this.yaw=.57;this.pitch=.57;this.radius=12.5;this.target=[0,.48,0];this.dpr=1;this.eye=[7,7,10];this.vp=I();this.stopped=false;gl.enable(gl.DEPTH_TEST);gl.enable(gl.CULL_FACE);gl.cullFace(gl.BACK);gl.enable(gl.BLEND);gl.blendFunc(gl.SRC_ALPHA,gl.ONE_MINUS_SRC_ALPHA);}
+mesh(raw){if(this.software)return {raw,count:raw.i.length};const gl=this.gl;let vao=gl.createVertexArray();gl.bindVertexArray(vao);let pb=gl.createBuffer();gl.bindBuffer(gl.ARRAY_BUFFER,pb);gl.bufferData(gl.ARRAY_BUFFER,new Float32Array(raw.p),gl.STATIC_DRAW);gl.enableVertexAttribArray(this.attr.p);gl.vertexAttribPointer(this.attr.p,3,gl.FLOAT,false,0,0);let nb=gl.createBuffer();gl.bindBuffer(gl.ARRAY_BUFFER,nb);gl.bufferData(gl.ARRAY_BUFFER,new Float32Array(raw.n),gl.STATIC_DRAW);gl.enableVertexAttribArray(this.attr.n);gl.vertexAttribPointer(this.attr.n,3,gl.FLOAT,false,0,0);let ib=gl.createBuffer();gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER,ib);gl.bufferData(gl.ELEMENT_ARRAY_BUFFER,new Uint32Array(raw.i),gl.STATIC_DRAW);gl.bindVertexArray(null);return {vao,count:raw.i.length,buffers:[pb,nb,ib]};}
+get(kind,...args){let key=kind+':'+args.join(',');if(!this.meshes.has(key)){let m=this.mesh(geo[kind](...args));m.kind=kind;m.args=args;this.meshes.set(key,m);}return this.meshes.get(key);}
+part(mesh,color,opts={}){let p={mesh,color,model:opts.model||I(),visible:true,emissive:opts.emissive||0,alpha:color[3]??1};this.parts.push(p);return p;}
+box(w,h,d,c,p=[0,0,0],o={}){return this.part(this.get('box',w,h,d),c,{...o,model:multiply(translation(...p),o.rotation||I())});}
+cylinder(r,h,c,p=[0,0,0],o={}){return this.part(this.get('cylinder',r,h,o.sides||24),c,{...o,model:multiply(translation(...p),o.rotation||I())});}
+torus(R,r,c,p=[0,0,0],o={}){return this.part(this.get('torus',R,r),c,{...o,model:multiply(translation(...p),o.rotation||I())});}
+sphere(r,c,p=[0,0,0],o={}){return this.part(this.get('sphere',r),c,{...o,model:translation(...p)});}
+wire(points,r,color,o={}){let m=this.mesh(line(points,r,10));m.kind='wire';m.path=points;m.radius=r;return this.part(m,color,o);}
+rod(a,b,r,color,o={}){const m=placeBetween(a,b);return this.part(this.get('cylinder',r,m.length,14),color,{...o,model:m.matrix});}
+resize(){const gl=this.gl,rect=this.canvas.getBoundingClientRect();let d=Math.min(devicePixelRatio||1,(Math.min(innerWidth,innerHeight)<600?1.2:1.65));this.dpr=d;const w=Math.max(1,Math.round(rect.width*d)),h=Math.max(1,Math.round(rect.height*d));if(this.canvas.width!==w||this.canvas.height!==h){this.canvas.width=w;this.canvas.height=h;}if(gl)gl.viewport(0,0,w,h);return [w,h];}
+matrices(){let w=this.canvas.width,h=this.canvas.height;let yaw=this.yaw,pi=this.pitch,r=this.radius,eye=add(this.target,[Math.sin(yaw)*Math.cos(pi)*r,Math.sin(pi)*r,Math.cos(yaw)*Math.cos(pi)*r]);this.eye=eye;this.vp=multiply(perspective(Math.PI/4,w/h,.075,100),lookAt(eye,this.target));}
+render(){let gl=this.gl;this.resize();this.matrices();if(this.software){drawSoftware(this);return;}gl.clearColor(.89,.945,.962,1);gl.clear(gl.COLOR_BUFFER_BIT|gl.DEPTH_BUFFER_BIT);gl.useProgram(this.program);gl.uniformMatrix4fv(this.uvp,false,this.vp);gl.uniform3fv(this.ucam,this.eye);const opaque=[],transparent=[];for(const p of this.parts)if(p.visible)(p.alpha<.999?transparent:opaque).push(p);gl.depthMask(true);const draw=p=>{gl.uniformMatrix4fv(this.um,false,p.model);gl.uniform4fv(this.uc,p.color);gl.uniform1f(this.ue,p.emissive);gl.bindVertexArray(p.mesh.vao);gl.drawElements(gl.TRIANGLES,p.mesh.count,gl.UNSIGNED_INT,0);};for(const p of opaque)draw(p);transparent.sort((a,b)=>{const m=a.model,n=b.model;return norm(sub([n[12],n[13],n[14]],this.eye))-norm(sub([m[12],m[13],m[14]],this.eye));});gl.depthMask(false);for(const p of transparent)draw(p);gl.depthMask(true);gl.bindVertexArray(null);}
+project(p){return project(p,this.vp,this.canvas.clientWidth,this.canvas.clientHeight);}
+rayAt(sx,sy,planeY){let ndcx=2*sx/this.canvas.clientWidth-1,ndcy=1-2*sy/this.canvas.clientHeight,eye=this.eye,forward=unit(sub(this.target,eye)),right=unit(cross(forward,[0,1,0])),up=cross(right,forward),tan=Math.tan(Math.PI/8),aspect=this.canvas.clientWidth/this.canvas.clientHeight;let dir=unit(add(forward,add(scale(right,ndcx*tan*aspect),scale(up,ndcy*tan))));let t=(planeY-eye[1])/(dir[1]||1e-8);return add(eye,scale(dir,t));}
+}
+function transform(m,p){return [m[0]*p[0]+m[4]*p[1]+m[8]*p[2]+m[12],m[1]*p[0]+m[5]*p[1]+m[9]*p[2]+m[13],m[2]*p[0]+m[6]*p[1]+m[10]*p[2]+m[14]];}
+function shade(col,k){return 'rgba('+Math.max(0,Math.min(255,Math.round(col[0]*255*k)))+','+Math.max(0,Math.min(255,Math.round(col[1]*255*k)))+','+Math.max(0,Math.min(255,Math.round(col[2]*255*k)))+','+(col[3]===undefined?1:col[3])+')';}
+function drawSoftware(en){const c=en.ctx,w=en.canvas.width,h=en.canvas.height,scaleFactor=en.dpr;
+ c.setTransform(scaleFactor,0,0,scaleFactor,0,0);let W=w/scaleFactor,H=h/scaleFactor;
+ const bg=c.createLinearGradient(0,0,0,H);bg.addColorStop(0,'#dcebf0');bg.addColorStop(.7,'#f5fafb');bg.addColorStop(1,'#d5e1e5');c.fillStyle=bg;c.fillRect(0,0,W,H);
+ const parts=en.parts.filter(p=>p.visible).slice();
+ const pr=p=>{let q=project(p,en.vp,W,H);return q;};
+ const path=(points,closed)=>{let valid=0;c.beginPath();for(const p of points){let q=pr(p);if(!q)continue;if(!valid++)c.moveTo(q.x,q.y);else c.lineTo(q.x,q.y);}if(closed)c.closePath();return valid>=2;};
+ const poly=(points,col,factor)=>{if(path(points,true)){c.fillStyle=shade(col,factor);c.fill();}};
+ for(const part of parts){const m=part.model,mesh=part.mesh,col=part.color,kind=mesh.kind||'other';
+  if(kind==='wire'){const pts=mesh.path.map(p=>transform(m,p)),a=pr(pts[0]),b=pr(pts[Math.min(1,pts.length-1)]);if(!a||!b)continue;c.strokeStyle=shade(col,1.15);c.lineWidth=Math.max(1.4,mesh.radius*W/(Math.max(a.depth,2)*.62));c.lineCap='round';c.lineJoin='round';if(path(pts,false))c.stroke();continue;}
+  if(kind==='box'){let [w,h,d]=mesh.args,x=w/2,y=h/2,z=d/2;const vertices=[[-x,-y,-z],[x,-y,-z],[x,y,-z],[-x,y,-z],[-x,-y,z],[x,-y,z],[x,y,z],[-x,y,z]].map(p=>transform(m,p));let faces=[[4,5,6,7,1.08],[0,1,2,3,.65],[1,5,6,2,.79],[0,4,7,3,.76],[3,2,6,7,1.3],[0,1,5,4,.63]];faces.sort((a,b)=>{let ca=a.slice(0,4).reduce((z,i)=>z+norm(sub(vertices[i],en.eye)),0);let cb=b.slice(0,4).reduce((z,i)=>z+norm(sub(vertices[i],en.eye)),0);return cb-ca;});for(const face of faces)poly(face.slice(0,4).map(i=>vertices[i]),col,face[4]);continue;}
+  if(kind==='cylinder'||kind==='cone'){const [r,h]=mesh.args,steps=18;let side=[],bottom=[],top=[];for(let j=0;j<=steps;j++){let a=j/steps*Math.PI*2;bottom.push(transform(m,[r*Math.cos(a),-h/2,r*Math.sin(a)]));top.push(transform(m,[kind==='cone'?0:r*Math.cos(a),h/2,kind==='cone'?0:r*Math.sin(a)]));}
+  for(let j=0;j<steps;j++)side.push({a:bottom[j],b:bottom[j+1],c:top[j+1],d:top[j],v:norm(sub(bottom[j],en.eye))});side.sort((a,b)=>b.v-a.v);for(const f of side)poly([f.a,f.b,f.c,f.d],col,.86);poly(bottom,col,.62);poly(top,col,1.24);continue;}
+  if(kind==='torus'){const [R,r]=mesh.args,pts=[];for(let j=0;j<=64;j++){let a=j*Math.PI/32;pts.push(transform(m,[R*Math.cos(a),0,R*Math.sin(a)]));}let p0=pr(pts[0]);if(!p0)continue;c.lineWidth=Math.max(1.3,r*W/(Math.max(p0.depth,2)*.65));c.strokeStyle=shade(col,1.1);if(path(pts,false))c.stroke();continue;}
+  if(kind==='sphere'){let center=pr(transform(m,[0,0,0]));if(!center)continue;let radius=mesh.args[0];let edge=pr(transform(m,[radius,0,0]));let R=edge?Math.hypot(edge.x-center.x,edge.y-center.y):4;R=Math.max(2,R);let grad=c.createRadialGradient(center.x-R*.35,center.y-R*.4,2,center.x,center.y,R);grad.addColorStop(0,shade(col,1.48));grad.addColorStop(1,shade(col,.61));c.fillStyle=grad;c.beginPath();c.arc(center.x,center.y,R,0,Math.PI*2);c.fill();continue;}
+  if(mesh.raw){const raw=mesh.raw;let step=Math.max(1,Math.floor(raw.i.length/4500));for(let q=0;q<raw.i.length;q+=3*step){let v=[];for(let j=0;j<3;j++){let idx=raw.i[q+j];v.push(transform(m,raw.p.slice(idx*3,idx*3+3)));}poly(v,col,.84);} }
+ }
+ c.setTransform(1,0,0,1,0,0);
+}
+
+const geo={box,cylinder,cone,torus,sphere,line};Object.assign(SR,{V,add,sub,scale,dot,cross,norm,unit,I,multiply,translation,rotationY,rotationZ,rotationX,scaling,placeBetween,smoothPath,Engine,geo});
+})();
+
+</script><script>
+/* SR PHYSICS 3D AC generator — two complete slip rings; custom WebGL2, no Three.js. */
+(function(){'use strict';
+const P=window.SR3D,$=id=>document.getElementById(id),e=new P.Engine($('scene'));
+const canvas=$('scene'),fx=$('effectsCanvas'),ctx=fx.getContext('2d',{alpha:true});
+const wave=$('waveCanvas'),wc=wave.getContext('2d');
+const TAU=2*Math.PI,clamp=(v,a,b)=>Math.min(b,Math.max(a,v));
+const C={wood:[.58,.39,.26,1],woodTop:[.77,.56,.39,1],woodEdge:[.38,.23,.15,1],steel:[.61,.70,.73,1],chrome:[.83,.88,.91,1],black:[.11,.17,.21,1],rubber:[.10,.13,.17,1],red:[.90,.20,.25,1],blue:[.16,.43,.82,1],copper:[.84,.42,.17,1],copperLight:[.98,.66,.32,1],enamel:[.54,.22,.12,1],gold:[.88,.68,.30,1],wireRed:[.80,.16,.20,1],wireBlack:[.13,.20,.24,1],teal:[.07,.65,.76,1],green:[.10,.82,.47,1],yellow:[1,.83,.34,1],grey:[.52,.63,.68,1],lamp:[.96,.97,.96,1],magnetN:[.91,.20,.27,1],magnetS:[.20,.48,.88,1],shade:[.10,.19,.24,.10]};
+const state={rpm:240,turns:120,field:.20,area:.018,resistance:24,internal:2,distance:4,speed:1,magnetDirection:1,rotationSign:1,magnetInstalled:true,loadConnected:true,driveOn:true,running:true,currentDots:true,fieldArrows:true,labels:true,shadows:true,language:'en',angle:-Math.PI/2,t:0};
+let lastT=0,lastMeasure=0,toastTimer,drag=null,longTimer=null,showingContext=false,activePointers=new Map(),pinchDist=null;
+let rotorParts=[],magnetParts=[],fieldParts=[],shadowParts=[],currentNodes=[],switchBlade=[],fixedPathA=[],fixedPathB=[],rotorPath=[],labels=[],bulb=null,gaugeNeedle=null,mechanicalArrow=[];
+const COIL_Y=1.57,COIL_Z=.36,LEFT=-1.72,RIGHT=1.72,RING_A=-1.43,RING_B=-1.02,RING_R=.21;
+const brushA=[RING_A,COIL_Y+RING_R+.025,COIL_Z],brushB=[RING_B,COIL_Y+RING_R+.025,COIL_Z];
+const galvIn=[-3.51,.69,-1.08],galvOut=[-2.88,.69,-1.08],swA=[-.63,.36,2.10],swB=[.02,.36,2.10],lampIn=[2.94,.72,1.74],lampOut=[3.52,.72,1.74];
+const toast=s=>{$('toast').textContent=s;$('toast').classList.add('show');clearTimeout(toastTimer);toastTimer=setTimeout(()=>$('toast').classList.remove('show'),1750)};
+function shaftRot(){return P.multiply(P.translation(0,COIL_Y,COIL_Z),P.rotationX(state.angle));}
+function rotorPoint(p){const c=Math.cos(state.angle),s=Math.sin(state.angle);return[p[0],COIL_Y+p[1]*c-p[2]*s,COIL_Z+p[1]*s+p[2]*c];}
+function rmParts(arr){for(const item of arr){const part=item.p||item;part.visible=false;const ix=e.parts.indexOf(part);if(ix>=0)e.parts.splice(ix,1);if(e.gl&&part.mesh&&part.mesh.kind==='wire'&&part.mesh.buffers){for(const b of part.mesh.buffers)e.gl.deleteBuffer(b);e.gl.deleteVertexArray(part.mesh.vao);}}arr.length=0;}
+function shadow(x,z,rx,rz){for(let k=1;k<=3;k++){let part=e.part(e.get('cylinder',1,.006,24),[.09,.15,.19,(4-k)*.034],{model:P.multiply(P.translation(x,.044+k*.003,z),P.scaling(rx*k/3,.08,rz*k/3))});part.visible=state.shadows;shadowParts.push(part);}}
+function room(){
+ e.box(11,.25,6.9,C.woodTop,[0,-.12,.06]);e.box(11.12,.13,7.02,C.woodEdge,[0,-.27,.06]);
+ for(let x of [-5.0,5.0])for(let z of [-2.9,2.9])e.box(.28,1.5,.28,C.steel,[x,-1.02,z]);
+ e.box(16,.07,12,[.76,.84,.87,1],[0,-1.88,-.3]);e.box(14,8,.13,[.82,.90,.92,1],[0,2.02,-5.5]);
+ e.box(4,2.5,.08,[.57,.72,.77,1],[-3.60,2.4,-5.39]);e.box(3.87,2.39,.03,[.81,.93,.96,1],[-3.6,2.4,-5.31]);
+ e.box(.06,2.4,.12,C.grey,[-3.6,2.4,-5.22]);e.box(3.96,.06,.12,C.grey,[-3.6,2.4,-5.22]);
+ e.box(2.96,1.05,.56,[.53,.68,.73,1],[3.93,2.52,-5.15]);e.box(3.04,.10,.68,[.40,.53,.57,1],[3.93,1.96,-5.0]);
+ for(let i=0;i<5;i++){let x=2.75+i*.53;e.cylinder(.08,.47,[.68,.89,.91,1],[x,2.32,-4.90]);e.cylinder(.05,.06,C.wood,[x,2.58,-4.90]);}
+ e.box(3,.11,.52,[.78,.87,.88,1],[0,4.15,-1.0]);e.box(2.6,.016,.30,C.lamp,[0,4.08,-1.0],{emissive:.23});
+ for(let x=-4.8;x<=4.8;x+=.82)e.box(.009,.009,6.3,[.60,.40,.27,.24],[x,.009,.06]);
+ // Model labels are overlaid separately; only physical apparatus occupies the bench.
+}
+function buildPaperclips(){for(let x of [LEFT,RIGHT]){
+  shadow(x,COIL_Z,.38,.40);
+  e.box(.52,.09,.53,[.63,.67,.70,1],[x,.10,COIL_Z]);
+  e.cylinder(.12,.13,C.chrome,[x,.21,COIL_Z]);
+  // The supports are mechanical bearings, not the electrical feed to the rotating coil.
+  const leg=P.smoothPath([[x,.22,COIL_Z],[x-.03,.42,COIL_Z],[x-.03,1.27,COIL_Z],[x,1.51,COIL_Z]],10);
+  e.wire(leg,.066,C.steel);e.torus(.11,.031,C.rubber,[x,COIL_Y,COIL_Z],{rotation:P.rotationZ(Math.PI/2)});
+ }
+}
+// Two distinct bar magnets, with opposing pole faces. Both sit on fixed blocks on the workbench.
+// +direction: FRONT N faces REAR S, giving a nearly uniform field along -Z across the rotating coil.
+function magnetGapHalf(){return .76+(state.distance-2)*.057;}
+function poleCoordinates(){const g=magnetGapHalf();return {front:COIL_Z+g,rear:COIL_Z-g,g};}
+function buildMagnet(){
+ rmParts(magnetParts);
+ if(!state.magnetInstalled)return;
+ const poles=poleCoordinates(), len=1.42, y=COIL_Y, blockW=1.13, blockH=.53;
+ const innerFront=state.magnetDirection>0?C.magnetN:C.magnetS;
+ const outerFront=state.magnetDirection>0?C.magnetS:C.magnetN;
+ const innerRear=state.magnetDirection>0?C.magnetS:C.magnetN;
+ const outerRear=state.magnetDirection>0?C.magnetN:C.magnetS;
+ function add(part){magnetParts.push(part);return part;}
+ // The two magnets have their long dimension along Z and are separated by a clear physical air gap.
+ function bar(face,sign,innerColor,outerColor){
+   const c=face+sign*len*.5;
+   // Fixed pedestal: no magnet floats in space.
+   add(e.box(blockW+.19,.18,len+.2,[.30,.43,.49,1],[0,.16,c]));
+   add(e.box(.83,1.05,1.03,[.57,.67,.69,1],[0,.77,c]));
+   add(e.box(blockW+.13,.07,len+.12,C.chrome,[0,1.315,c]));
+   let half=len/2;
+   add(e.box(blockW,blockH,half,innerColor,[0,y,face+sign*len*.25]));
+   add(e.box(blockW,blockH,half,outerColor,[0,y,face+sign*len*.75]));
+   add(e.box(blockW+.018,blockH+.018,.045,C.chrome,[0,y,face+sign*len*.5]));
+   // Metallic rim around the pole surface and glint on the top edge.
+   add(e.box(blockW+.03,blockH+.03,.042,C.chrome,[0,y,face+sign*.028]));
+   add(e.box(.025,.019,len-.07,C.chrome,[blockW*.46,y+blockH*.5+.006,c]));
+   add(e.box(.025,.019,len-.07,C.chrome,[-blockW*.46,y+blockH*.5+.006,c]));
+ }
+ bar(poles.front,+1,innerFront,outerFront); // near face N, outer face S
+ bar(poles.rear,-1,innerRear,outerRear);   // near face S, outer face N
+}
+function buildField(){
+ rmParts(fieldParts);
+ if(!state.fieldArrows||!state.magnetInstalled)return;
+ const poles=poleCoordinates(), dir=state.magnetDirection;
+ const from=dir>0?poles.front-.075:poles.rear+.075;
+ const to=dir>0?poles.rear+.075:poles.front-.075;
+ // Field-line arrows run N -> S, parallel to the workbench through the centre of the rotating coil.
+ for(const x of [-.43,0,.43])for(const y of [COIL_Y-.43,COIL_Y,COIL_Y+.43]){
+   const c=C.teal;
+   fieldParts.push(e.rod([x,y,from],[x,y,to],.012,c));
+   const z=from+(to-from)*.57;
+   const head=[x,y,z];
+   const back=[x,y,z-(to-from)*.085];
+   fieldParts.push(e.part(e.get('cone',.075,.22,12),c,{model:P.placeBetween(back,head).matrix,emissive:.22}));
+ }
+}
+
+function rotorPiece(part){rotorParts.push({p:part,local:part.model});return part;}
+function rotorWire(points,r,color){return rotorPiece(e.wire(P.smoothPath(points,10),r,color));}
+function buildRotor(){rmParts(rotorParts);rotorPath=[];
+  rotorPiece(e.rod([LEFT,0,0],[2.58,0,0],.045,C.rubber));
+  rotorPiece(e.rod([-.89,0,0],[2.53,0,0],.019,C.chrome));
+  // Every slip ring is a complete 360-degree copper torus, insulated from the shaft and from the other ring.
+  for(let j=0;j<2;j++){
+    const x=j===0?RING_A:RING_B,col=j===0?C.copperLight:C.gold;
+    rotorPiece(e.cylinder(.145,.22,C.rubber,[x,0,0],{rotation:P.rotationZ(Math.PI/2)}));
+    rotorPiece(e.torus(RING_R,.060,col,[x,0,0],{rotation:P.rotationZ(Math.PI/2),emissive:.05}));
+    rotorPiece(e.torus(.125,.013,C.chrome,[x-.11,0,0],{rotation:P.rotationZ(Math.PI/2)}));
+  }
+  const fac=Math.sqrt(state.area/.018),xw=.96*fac,zw=.43*fac;
+  const leadA=[[RING_A,.15,.13],[RING_A+.17,.15,.13],[-1.02,.11,-zw*.73],[-xw,0,-zw]];
+  const leadB=[[-xw,0,zw],[-1.03,-.08,zw*.72],[RING_B-.16,-.14,-.13],[RING_B,-.14,-.13]];
+  rotorWire(leadA,.042,C.copperLight);rotorWire(leadB,.042,C.gold);
+  const shown=clamp(Math.round(state.turns/20),3,11);
+  for(let j=0;j<shown;j++){
+    const a=(j-(shown-1)/2)*.011;
+    let xx=xw-a,zz=zw+a*.6;
+    rotorWire([[-xx,0,-zz],[xx,0,-zz],[xx,0,zz],[-xx,0,zz],[-xx,0,-zz]],.024,C.copperLight);
+  }
+  rotorPath=[...leadA,[-xw,0,-zw],[xw,0,-zw],[xw,0,zw],[-xw,0,zw],...leadB];
+  // Mechanical flywheel, coupling and visible offset handle are rigidly fixed to the same shaft.
+  rotorPiece(e.torus(.31,.055,C.chrome,[2.17,0,0],{rotation:P.rotationZ(Math.PI/2)}));
+  rotorPiece(e.cylinder(.155,.25,C.grey,[2.33,0,0],{rotation:P.rotationZ(Math.PI/2)}));
+  rotorPiece(e.rod([2.33,.16,.14],[2.33,.43,.14],.065,C.chrome));
+  rotorPiece(e.sphere(.099,C.black,[2.33,.43,.14]));
+  poseRotor();
+}
+function poseRotor(){let M=shaftRot();for(let item of rotorParts)item.p.model=P.multiply(M,item.local);}
+function buildBrushes(){
+  // Each stationary carbon brush touches the TOP of ONE full ring at all rotor angles.
+  for(let k=0;k<2;k++){
+   const x=k===0?RING_A:RING_B,p=k===0?brushA:brushB;
+   e.box(.18,.19,.22,C.black,[x,p[1]+.083,COIL_Z]);
+   e.box(.20,.045,.19,C.chrome,[x,p[1]+.012,COIL_Z]);
+   e.sphere(.046,C.gold,p);
+   e.rod([x,p[1]+.10,COIL_Z],[x,p[1]+.10,COIL_Z+.35],.04,C.chrome);
+   e.rod([x,p[1]+.10,COIL_Z+.35],[x,.45,COIL_Z+.48],.045,C.steel);
+   e.box(.30,.12,.34,C.steel,[x,.14,COIL_Z+.49]);
+  }
+  shadow((RING_A+RING_B)/2,COIL_Z,.62,.75);
+}
+function buildGeneratorDrive(){
+  shadow(2.84,COIL_Z,1.22,.62);
+  e.box(1.15,.30,1.02,[.35,.47,.52,1],[2.81,.22,COIL_Z]);
+  e.box(.91,.91,.80,[.15,.34,.43,1],[2.80,.83,COIL_Z]);
+  for(let j=0;j<8;j++)e.box(.026,.72,.85,[.33,.57,.61,1],[2.51+j*.083,.82,COIL_Z]);
+  e.cylinder(.19,.33,C.chrome,[2.33,COIL_Y,COIL_Z],{rotation:P.rotationZ(Math.PI/2)});
+  e.cylinder(.21,.07,C.black,[2.70,1.31,COIL_Z+.08]);
+  e.cylinder(.10,.10,C.gold,[2.70,1.38,COIL_Z+.08]);
+  e.sphere(.09,C.red,[3.06,1.27,COIL_Z+.23]);
+}
+function buildMeter(){
+  shadow(-3.21,-1.13,.84,.80);
+  e.box(1.19,.57,.93,[.19,.26,.30,1],[-3.18,.40,-1.43]);
+  e.box(1.06,.54,.035,[.88,.93,.92,1],[-3.18,.58,-.953]);
+  e.cylinder(.385,.036,[.87,.89,.83,1],[-3.18,.61,-.919],{rotation:P.rotationX(Math.PI/2),sides:40});
+  e.torus(.33,.015,C.grey,[-3.18,.61,-.892],{rotation:P.rotationX(Math.PI/2)});
+  for(let j=-4;j<=4;j++){let a=j*.19;let x=-3.18+.29*Math.sin(a),y=.61+.29*Math.cos(a);e.rod([x,y,-.882],[x+.013*Math.cos(a),y+.013*Math.sin(a),-.882],.012,C.black);}
+  gaugeNeedle=e.rod([-3.18,.56,-.858],[-3.18,.88,-.858],.020,C.red);
+  for(let term of [galvIn,galvOut]){e.cylinder(.078,.10,C.gold,[term[0],term[1]-.035,term[2]],{sides:18});e.sphere(.06,C.gold,term);}
+}
+function poseNeedle(){if(!gaugeNeedle)return;let I=outputCurrent(),a=clamp(I/.55,-1,1)*.68;let center=[-3.18,.55,-.857];let tip=[center[0]+.31*Math.sin(a),center[1]+.31*Math.cos(a),center[2]];gaugeNeedle.model=P.placeBetween(center,tip).matrix;}
+function buildLamp(){
+  shadow(3.23,1.74,.83,.8);
+  e.box(1.15,.19,.95,[.41,.51,.55,1],[3.23,.17,1.74]);
+  e.cylinder(.19,.35,C.chrome,[3.23,.39,1.74]);
+  bulb=e.sphere(.29,[.94,.91,.63,.95],[3.23,.82,1.74],{emissive:.1});
+  for(let j=0;j<6;j++){let x=3.14+j*.036;e.rod([x,.78,1.69],[x+.03,.88,1.77],.009,C.enamel);}
+  e.cylinder(.12,.06,C.grey,[3.23,1.11,1.74]);
+  for(let term of [lampIn,lampOut]){e.sphere(.065,C.gold,term);e.rod([term[0],.31,term[2]],[term[0],term[1],term[2]],.04,C.chrome);}
+}
+function buildSwitch(){shadow(-.33,2.10,.9,.49);e.box(1.20,.14,.58,[.52,.39,.27,1],[-.30,.16,2.10]);
+  for(let p of [swA,swB]){e.sphere(.089,C.gold,p);e.cylinder(.07,.08,C.chrome,[p[0],.28,p[2]]);}updateBlade();}
+function updateBlade(){rmParts(switchBlade);let end=state.loadConnected?swB:[-.02,.83,2.10];switchBlade.push(e.rod(swA,end,.050,C.gold));switchBlade.push(e.sphere(.079,C.chrome,end));}
+function buildCables(){
+  // Closed electrical route, with NO decorative dangling wire ends:
+  // brush A -> galvanometer -> series switch -> lamp/load -> brush B.
+  const a=P.smoothPath([brushA,[RING_A,2.03,.65],[-1.72,1.17,.98],[-2.55,.34,.82],[-3.62,.34,-.04],galvIn],8);
+  const b=P.smoothPath([galvOut,[-3.42,.32,.34],[-3.25,.24,2.38],[-1.08,.24,2.38],swA],8);
+  const c=P.smoothPath([swB,[.34,.26,2.38],[2.68,.26,2.38],lampIn],8);
+  const d=P.smoothPath([lampOut,[4.05,.25,2.30],[4.52,.26,.65],[4.13,.25,-1.97],[.52,.24,-2.35],[-1.04,.47,-1.72],[RING_B,2.03,.78],brushB],9);
+  for(let [points,col] of [[a,C.wireRed],[b,C.wireBlack],[c,C.wireRed],[d,C.wireBlack]])e.wire(points,.047,col);
+  fixedPathA=[...a,galvOut,...b,swB,...c,lampOut,...d];
+  fixedPathB=[...d];
+}
+function buildParticles(){rmParts(currentNodes);for(let i=0;i<35;i++)currentNodes.push(e.sphere(.042,C.yellow,[0,0,0],{emissive:.7}));}
+function phaseAngle(){return state.angle+Math.PI/2;}
+function rotationRate(){return state.driveOn?state.rotationSign*state.rpm*TAU/60:0;}
+function effectiveB(){return !state.magnetInstalled?0:state.magnetDirection*state.field*clamp(Math.pow(4/state.distance,1.45),.22,1.75);}
+function flux(){return state.turns*state.area*effectiveB()*Math.cos(phaseAngle());}
+function emf(){return state.turns*state.area*effectiveB()*rotationRate()*Math.sin(phaseAngle());}
+function peakEMF(){return Math.abs(state.turns*state.area*effectiveB()*rotationRate());}
+function outputCurrent(){return state.loadConnected?emf()/(state.resistance+state.internal):0;}
+function voltageLoad(){return state.loadConnected?outputCurrent()*state.resistance:emf();}
+function powerLoad(){return outputCurrent()*outputCurrent()*state.resistance;}
+function reactionTorque(){return -state.turns*state.area*effectiveB()*outputCurrent()*Math.sin(phaseAngle());}
+function stepPhysics(dt){if(!state.running)return;state.angle+=rotationRate()*Math.min(.08,Math.max(0,dt))*state.speed;if(Math.abs(state.angle)>TAU*500)state.angle%=TAU;}
+function pathSample(points,f){let segs=[],total=0;for(let i=1;i<points.length;i++){total+=P.norm(P.sub(points[i],points[i-1]));segs.push(total);}if(!total)return points[0]||[0,0,0];let d=((f%1)+1)%1*total,j=0;while(j<segs.length-1&&d>segs[j])j++;let k=(d-(j?segs[j-1]:0))/((segs[j]-(j?segs[j-1]:0))||1);return P.add(points[j],P.scale(P.sub(points[j+1],points[j]),k));}
+function updateParticles(dt){const I=outputCurrent();if(!state.currentDots||Math.abs(I)<.012){for(let p of currentNodes)p.visible=false;return;}
+  state.t+=Math.min(.05,dt)*state.speed*.24;
+  const ext=fixedPathA,rot=rotorPath.map(rotorPoint);
+  for(let k=0;k<currentNodes.length;k++){
+    let p=currentNodes[k],useRotor=k>=19,pts=useRotor?rot:ext;
+    let flow=state.t*Math.min(3,Math.sqrt(Math.abs(I)))*Math.sign(I)+(k%19)/19;
+    p.model=P.translation(...pathSample(pts,flow));p.visible=true;
+  }
+}
+function createLabels(){const mk=(name,fn,cls='')=>{let el=document.createElement('div');el.className='screenLabel '+cls;el.textContent=name;$('apparatusLabels').appendChild(el);labels.push({el,fn,name});};
+  mk('A₁ · SLIP RING',()=>[RING_A,COIL_Y+.34,COIL_Z-.26]);mk('A₂ · SLIP RING',()=>[RING_B,COIL_Y+.34,COIL_Z+.10]);
+  mk('BRUSH B₁',()=>[RING_A,2.11,COIL_Z+.30]);mk('BRUSH B₂',()=>[RING_B,2.11,COIL_Z+.30]);
+  mk('COIL ABCD',()=>[0,COIL_Y+.54,COIL_Z]);mk('MECHANICAL DRIVE',()=>[2.73,1.66,COIL_Z]);
+  mk('GALVANOMETER G',()=>[-3.22,1.22,-1.0]);mk('AC LOAD',()=>[3.24,1.36,1.74]);mk('SWITCH',()=>[-.3,.64,2.10]);
+  mk('FRONT POLE',()=>[0,COIL_Y+.39,poleCoordinates().front+.17],'magnet');mk('REAR POLE',()=>[0,COIL_Y+.39,poleCoordinates().rear-.17],'magnet');
+}
+function updateLabels(){for(let obj of labels){if(!state.labels||(obj.el.classList.contains('magnet')&&!state.magnetInstalled)){obj.el.hidden=true;continue;}
+  if(obj.name==='FRONT POLE')obj.el.textContent=(state.magnetDirection>0?'N':'S')+' · FRONT BAR MAGNET';
+  if(obj.name==='REAR POLE')obj.el.textContent=(state.magnetDirection>0?'S':'N')+' · REAR BAR MAGNET';
+  const p=e.project(obj.fn());if(!p||p.x<0||p.y<0||p.x>canvas.clientWidth||p.y>canvas.clientHeight){obj.el.hidden=true;continue;}obj.el.hidden=false;obj.el.style.left=p.x+'px';obj.el.style.top=p.y+'px';}}
+function signed(v,dp=2){return(v>=0?'+':'−')+Math.abs(v).toFixed(dp)}
+function measure(){const E=emf(),I=outputCurrent(),B=effectiveB(),omega=rotationRate(),peak=peakEMF(),u=phaseAngle(),rms=peak/Math.SQRT2;
+  $('emfOut').textContent=signed(E)+' V';$('currentOut').textContent=signed(I)+' A';$('rmsOut').textContent=rms.toFixed(2)+' V';$('frequencyOut').textContent=(Math.abs(omega)/TAU).toFixed(2)+' Hz';
+  $('statusChip').classList.toggle('off',!state.driveOn||!state.loadConnected);
+  $('statusText').textContent=!state.driveOn?'DRIVE OFF':!state.magnetInstalled?'NO MAGNETIC FIELD':!state.loadConnected?'OPEN LOAD · VOLTAGE PRESENT':'AC OUTPUT · LOAD CONNECTED';
+  $('powerText').textContent=state.driveOn?'⏸ Stop drive':'▶ Start drive';$('driveBtn').textContent=state.driveOn?'⏸ Stop mechanical drive':'▶ Start mechanical drive';
+  $('loadConnected').checked=state.loadConnected;$('noLoadBtn').textContent=state.loadConnected?'Open output circuit':'Connect output circuit';
+  $('brushStatus').textContent='B₁ ↔ A₁ · B₂ ↔ A₂ · Always';
+  $('coilStatus').textContent=`Output ${signed(E)} V · Current ${signed(I)} A`;
+  $('waveLabel').textContent=`${signed(E)} V`;
+  $('physicsNote').textContent=`θ=${((u*180/Math.PI)%360+360)%360|0}° · peak ${peak.toFixed(2)} V · rings stay connected`;
+  $('calcDetails').innerHTML=`N = ${state.turns} turns · A = ${state.area.toFixed(3)} m²<br>B = ${Math.abs(B).toFixed(3)} T · ω = ${Math.abs(omega).toFixed(2)} rad/s<br>Φ = ${flux().toFixed(3)} Wb-turn · ε<sub>peak</sub> = ${peak.toFixed(2)} V<br>V<sub>load</sub> = ${signed(voltageLoad())} V · I = ${signed(I)} A<br>P<sub>load</sub> = ${powerLoad().toFixed(2)} W · opposing τ = ${reactionTorque().toFixed(3)} N·m`;
+  if(bulb)bulb.emissive=clamp(.015+powerLoad()/2.5, .015,1.4);
+  poseNeedle();
+}
+function drawWaveform(){let r=wave.getBoundingClientRect(),d=Math.min(devicePixelRatio||1,1.5),w=Math.max(1,Math.round(r.width*d)),h=Math.max(1,Math.round(r.height*d));if(wave.width!==w||wave.height!==h){wave.width=w;wave.height=h;}wc.setTransform(d,0,0,d,0,0);w=r.width;h=r.height;wc.clearRect(0,0,w,h);
+  let left=24,top=12,right=w-10,bottom=h-16,mid=(top+bottom)/2,amp=(bottom-top)*.44;
+  wc.lineWidth=1;wc.strokeStyle='#658b9a55';for(let j=0;j<5;j++){let yy=top+(bottom-top)*j/4;wc.beginPath();wc.moveTo(left,yy);wc.lineTo(right,yy);wc.stroke();}
+  for(let j=0;j<5;j++){let x=left+(right-left)*j/4;wc.beginPath();wc.moveTo(x,top);wc.lineTo(x,bottom);wc.stroke();}
+  const waveSign=Math.sign(effectiveB()*rotationRate())||1;wc.strokeStyle='#70e3db';wc.lineWidth=2.15;wc.beginPath();for(let i=0;i<=160;i++){let f=i/160,x=left+(right-left)*f,y=mid-amp*waveSign*Math.sin(f*TAU);i?wc.lineTo(x,y):wc.moveTo(x,y);}wc.stroke();
+  let phase=((phaseAngle()%TAU)+TAU)%TAU/TAU;
+  let x=left+(right-left)*phase,y=mid-amp*waveSign*Math.sin(phase*TAU);
+  wc.strokeStyle='#ffffff8a';wc.setLineDash([3,4]);wc.beginPath();wc.moveTo(x,top);wc.lineTo(x,bottom);wc.stroke();wc.setLineDash([]);
+  wc.fillStyle='#f5b56d';wc.beginPath();wc.arc(x,y,4.2,0,TAU);wc.fill();
+  wc.font='9px system-ui';wc.fillStyle='#b9d2db';wc.fillText('0',9,mid+3);wc.fillText('0°',left,bottom+11);wc.fillText('180°',(left+right)/2-12,bottom+11);wc.fillText('360°',right-24,bottom+11);
+}
+const views={iso:[.52,.60,10.20],front:[.02,.25,10.15],top:[.02,1.54,10.6],left:[-1.55,.40,10.15],right:[1.55,.40,10.15]};
+function camera(name){let v=views[name];e.target=[-.05,1.01,.20];e.yaw=v[0];e.pitch=v[1];e.radius=v[2]*(Math.min(canvas.clientWidth,canvas.clientHeight)<480?1.15:1);document.querySelectorAll('[data-view]').forEach(b=>b.classList.toggle('active',b.dataset.view===name));}
+function screen(ev){let r=canvas.getBoundingClientRect();return{x:ev.clientX-r.left,y:ev.clientY-r.top};}
+function contextOpen(x,y){const r=$('workspace').getBoundingClientRect(),box=$('context');box.style.left=clamp(x-r.left+4,8,r.width-202)+'px';box.style.top=clamp(y-r.top+4,8,r.height-237)+'px';box.classList.add('visible');showingContext=true;}
+function contextClose(){$('context').classList.remove('visible');showingContext=false;}
+canvas.addEventListener('pointerdown',ev=>{if(ev.pointerType==='mouse'&&ev.button!==0)return;let s=screen(ev);contextClose();activePointers.set(ev.pointerId,s);try{canvas.setPointerCapture(ev.pointerId)}catch(e){}if(activePointers.size>1){clearTimeout(longTimer);drag=null;const a=[...activePointers.values()];pinchDist=Math.hypot(a[0].x-a[1].x,a[0].y-a[1].y);return;}drag={id:ev.pointerId,start:s,last:s,moved:false};clearTimeout(longTimer);longTimer=setTimeout(()=>{if(drag&&!drag.moved){contextOpen(ev.clientX,ev.clientY);drag.menu=true;}},570);});
+canvas.addEventListener('pointermove',ev=>{let s=screen(ev);if(activePointers.has(ev.pointerId))activePointers.set(ev.pointerId,s);if(activePointers.size>=2){let a=[...activePointers.values()],dist=Math.hypot(a[0].x-a[1].x,a[0].y-a[1].y);if(pinchDist>0&&dist>0)e.radius=clamp(e.radius*pinchDist/dist,4.8,21);pinchDist=dist;return;}if(!drag||drag.id!==ev.pointerId||drag.menu)return;let dx=s.x-drag.last.x,dy=s.y-drag.last.y;if(Math.hypot(s.x-drag.start.x,s.y-drag.start.y)>8){drag.moved=true;clearTimeout(longTimer);}if(drag.moved){e.yaw-=dx*.0062;e.pitch=clamp(e.pitch+dy*.005,.12,1.55);document.querySelectorAll('[data-view]').forEach(b=>b.classList.remove('active'));}drag.last=s;});
+function release(ev){activePointers.delete(ev.pointerId);if(activePointers.size<2)pinchDist=null;if(!drag||drag.id!==ev.pointerId)return;clearTimeout(longTimer);drag=null;}
+canvas.addEventListener('pointerup',release);canvas.addEventListener('pointercancel',release);canvas.addEventListener('wheel',ev=>{ev.preventDefault();e.radius=clamp(e.radius*Math.exp(ev.deltaY*.001),4.8,21);},{passive:false});canvas.addEventListener('contextmenu',ev=>{ev.preventDefault();contextOpen(ev.clientX,ev.clientY);});
+function syncPause(){$('pauseBtn').textContent=state.running?'Ⅱ Pause simulation':'▶ Resume simulation';}
+function syncControls(){for(const [id,fmt] of Object.entries({rpm:v=>v+' rpm',turns:v=>v,field:v=>v.toFixed(2)+' T',area:v=>v.toFixed(3)+' m²',resistance:v=>v+' Ω',internal:v=>v.toFixed(1)+' Ω',distance:v=>v.toFixed(1)+' cm',speed:v=>v.toFixed(1)+'×'}))$(id+'Value').textContent=fmt(+$(id).value);measure();}
+function reset(){Object.assign(state,{rpm:240,turns:120,field:.20,area:.018,resistance:24,internal:2,distance:4,speed:1,magnetDirection:1,rotationSign:1,magnetInstalled:true,loadConnected:true,driveOn:true,running:true,currentDots:true,fieldArrows:true,labels:true,shadows:true,angle:-Math.PI/2});for(let id of ['rpm','turns','field','area','resistance','internal','distance','speed'])$(id).value=state[id];for(let [id,on] of [['magnetInstalled',true],['loadConnected',true],['showCurrent',true],['showField',true],['showLabels',true],['showShadows',true]])$(id).checked=on;buildRotor();buildMagnet();buildField();updateBlade();for(let q of shadowParts)q.visible=true;syncPause();syncControls();toast('AC generator reset');}
+for(const id of ['rpm','turns','field','area','resistance','internal','distance','speed'])$(id).addEventListener('input',ev=>{state[id]=+ev.target.value;if(['turns','area'].includes(id))buildRotor();if(id==='distance'){buildMagnet();buildField();}syncControls();});
+$('magnetInstalled').onchange=ev=>{state.magnetInstalled=ev.target.checked;buildMagnet();buildField();measure();};
+$('loadConnected').onchange=ev=>{state.loadConnected=ev.target.checked;updateBlade();measure();};
+$('showCurrent').onchange=ev=>state.currentDots=ev.target.checked;
+$('showField').onchange=ev=>{state.fieldArrows=ev.target.checked;buildField();};
+$('showLabels').onchange=ev=>state.labels=ev.target.checked;
+$('showShadows').onchange=ev=>{state.shadows=ev.target.checked;for(let part of shadowParts)part.visible=state.shadows;};
+function toggleDrive(){state.driveOn=!state.driveOn;measure();toast(state.driveOn?'Mechanical drive running':'Mechanical drive stopped');}
+function toggleLoad(){state.loadConnected=!state.loadConnected;$('loadConnected').checked=state.loadConnected;updateBlade();measure();toast(state.loadConnected?'External load connected':'Output open: voltage present, no current');}
+$('driveBtn').onclick=$('powerBtn').onclick=toggleDrive;
+$('reverseBtn').onclick=()=>{state.rotationSign*=-1;measure();toast('Rotation reversed · induced polarity reverses');};
+$('reverseFieldBtn').onclick=()=>{state.magnetDirection*=-1;buildMagnet();buildField();measure();toast('N/S poles reversed · induced polarity reverses');};
+$('resetAngleBtn').onclick=()=>{state.angle=-Math.PI/2;poseRotor();measure();toast('Coil returned to peak-flux position');};
+$('pauseBtn').onclick=()=>{state.running=!state.running;syncPause();};
+$('stepBtn').onclick=()=>{state.angle+=state.rotationSign*Math.PI/6;poseRotor();measure();drawWaveform();};
+$('noLoadBtn').onclick=toggleLoad;$('shortPresetBtn').onclick=()=>{$('rpm').value=300;state.rpm=300;syncControls();toast('Mechanical drive: 300 rpm');};$('resetBtn').onclick=reset;
+function exportPNG(){let dst=document.createElement('canvas');dst.width=canvas.width;dst.height=canvas.height;let c=dst.getContext('2d');c.drawImage(canvas,0,0);c.drawImage(fx,0,0,dst.width,dst.height);const link=document.createElement('a');link.download='SR-Physics-3D-AC-Generator.png';link.href=dst.toDataURL('image/png');link.click();}
+$('captureBtn').onclick=$('exportBtn').onclick=exportPNG;
+for(let btn of document.querySelectorAll('[data-view]'))btn.onclick=()=>camera(btn.dataset.view);
+$('zoomIn').onclick=()=>e.radius=clamp(e.radius*.82,4.8,21);$('zoomOut').onclick=()=>e.radius=clamp(e.radius*1.2,4.8,21);$('resetCam').onclick=()=>camera('iso');
+$('controlsBtn').onclick=()=>{$('drawer').classList.add('open');$('drawerShade').classList.add('open');};
+$('closeDrawer').onclick=$('drawerShade').onclick=()=>{$('drawer').classList.remove('open');$('drawerShade').classList.remove('open');};
+$('ctxClose').onclick=contextClose;
+for(let btn of document.querySelectorAll('[data-action]'))btn.onclick=()=>{let action=btn.dataset.action;contextClose();if(action==='drive')toggleDrive();if(action==='load')toggleLoad();if(action==='reverse')$('reverseBtn').click();if(action==='magnet')$('magnetInstalled').click();if(action==='controls')$('controlsBtn').click();};
+$('fullscreenBtn').onclick=()=>{if(document.fullscreenElement)document.exitFullscreen?.();else $('app').requestFullscreen?.();};
+const trans={en:{controls:'Controls',live:'LIVE 3D LABORATORY',emf:'INDUCED EMF',current:'OUTPUT CURRENT',rms:'RMS VOLTAGE',frequency:'FREQUENCY',camera:'CAMERA',panelTag:'EXPERIMENT 08 · AC GENERATOR',panelTitle:'Generator controls',operation:'Run the generator',electrical:'Generator parameters',rpm:'Mechanical rotation speed',turns:'Coil turns, N',field:'Magnetic flux density, B',area:'Coil area, A',resistance:'External load resistance',internal:'Coil internal resistance',distance:'Magnet gap (qualitative)',speed:'Playback speed',output:'Slip rings & electrical output',loadConnect:'Connect external load / galvanometer',apparatus:'3D apparatus & presentation',showMagnets:'Two bar magnets, N facing S',showCurrent:'Animated current particles',showField:'Magnetic field arrows',showLabels:'Apparatus labels',showShadows:'Contact shadows',physics:'Physics & observations'},si:{controls:'පාලන',live:'සජීවී 3D විද්‍යාගාරය',emf:'ප්‍රේරිත විද්‍යුත්ගාමක බලය',current:'ප්‍රතිදාන ධාරාව',rms:'RMS වෝල්ටීයතාව',frequency:'සංඛ්‍යාතය',camera:'කැමරාව',panelTag:'පරීක්ෂණය 08 · AC ජනකය',panelTitle:'ජනකයේ පාලන',operation:'ජනකය ක්‍රියාත්මක කරන්න',electrical:'ජනකයේ පරාමිති',rpm:'යාන්ත්‍රික භ්‍රමණ වේගය',turns:'දඟර වට ගණන, N',field:'චුම්බක ප්‍රවාහ ඝනත්වය, B',area:'දඟර වර්ගඵලය, A',resistance:'බාහිර භාර ප්‍රතිරෝධය',internal:'දඟර අභ්‍යන්තර ප්‍රතිරෝධය',distance:'චුම්බක අතර පරතරය',speed:'සජීවීකරණ වේගය',output:'සර්පණ වළලු හා ප්‍රතිදානය',loadConnect:'බාහිර භාරය සම්බන්ධ කරන්න',apparatus:'3D උපකරණ හා දර්ශන',showMagnets:'දණ්ඩ චුම්බක දෙකක්, N සිට S',showCurrent:'විදුලි ධාරා අංශු',showField:'චුම්බක ක්ෂේත්‍ර ඊතල',showLabels:'උපකරණ නාම',showShadows:'සෙවණැලි',physics:'භෞතික විද්‍යාව හා නිරීක්ෂණ'}};
+function language(lang){state.language=lang;document.documentElement.lang=lang;for(let n of document.querySelectorAll('[data-i]'))n.textContent=trans[lang][n.dataset.i]||n.textContent;$('pageTitle').textContent=lang==='si'?'3D සර්පණ වළලු AC ජනකය':'3D AC Generator · Slip-Ring Experiment';$('pageSub').textContent=lang==='si'?'භ්‍රමණ දඟරය · සර්පණ වළලු දෙක · ප්‍රත්‍යාවර්ත ධාරාව':'Rotating coil · two full slip rings · alternating EMF';$('expName').textContent=lang==='si'?'AC ජනකය · සර්පණ වළලු':'AC GENERATOR · SLIP RINGS';$('instruction').textContent=lang==='si'?'යාන්ත්‍රික භ්‍රමණයෙන් ප්‍රත්‍යාවර්ත විද්‍යුත්ගාමක බලයක් ජනනය වේ':'Mechanical rotation creates alternating EMF and current';}
+$('language').onchange=ev=>language(ev.target.value);
+$('brandImg').onload=()=>$('brandMark').classList.add('success');$('brandImg').onerror=()=>$('brandMark').classList.remove('success');if($('brandImg').complete&&$('brandImg').naturalWidth>0)$('brandMark').classList.add('success');
+document.addEventListener('keydown',ev=>{if(ev.key==='Escape'){contextClose();$('closeDrawer').click();}if(ev.key===' '&&!(ev.target instanceof HTMLInputElement)){ev.preventDefault();state.running=!state.running;syncPause();}});
+let lastWave=0;
+function frame(t){const interval=(Math.min(innerWidth,innerHeight)<620?1000/24:1000/45);if(lastT&&t-lastT<interval){requestAnimationFrame(frame);return;}const dt=lastT?(t-lastT)/1000:0;lastT=t;stepPhysics(dt);poseRotor();updateParticles(dt);e.render();updateLabels();if(t-lastMeasure>60){measure();lastMeasure=t;}if(t-lastWave>45){drawWaveform();lastWave=t;}requestAnimationFrame(frame);}
+room();buildPaperclips();buildBrushes();buildGeneratorDrive();buildMeter();buildLamp();buildSwitch();buildCables();buildMagnet();buildRotor();buildField();buildParticles();createLabels();syncPause();syncControls();camera('iso');requestAnimationFrame(frame);
+window.SRGeneratorDebug={state,engine:e,emf,peakEMF,flux,outputCurrent,voltageLoad,rotationRate,reactionTorque,powerLoad,angle:phaseAngle,simStep:dt=>{stepPhysics(dt);poseRotor();measure();drawWaveform();},setAngle:a=>{state.angle=a;poseRotor();measure();drawWaveform();},setLoad:v=>{state.loadConnected=v;updateBlade();measure();},setDrive:v=>{state.driveOn=v;measure();}};
+})();
+
+</script></body></html>

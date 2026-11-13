@@ -22,11 +22,45 @@
 #effectsCanvas{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:1}#apparatusLabels{position:absolute;inset:0;pointer-events:none;z-index:2}.ambient-label,.status-chip,.readings,.hudNote,.cameraBar,.hintBar,.toast{z-index:3}.read{min-width:113px} .modeBtns{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px;margin-top:12px}.modeBtns button{font-size:10px;line-height:1.3;padding:9px 4px;border:1px solid #c5dbe4;border-radius:9px;color:#226073;background:#edf7fa;font-weight:760}.modeBtns button.active{background:#06899b;color:white;border-color:#06899b}.context{width:205px}.context #contextButtons{display:grid;gap:5px}.context #contextButtons button{width:100%;text-align:left}.label3d{position:absolute;transform:translate(-50%,-50%);white-space:nowrap;font-size:10px;font-weight:850;padding:4px 7px;border-radius:7px;background:#fffc;border:1px solid #9bced7;box-shadow:0 2px 8px #194b6628;color:#1b5467}.label3d.positive{color:#c8354a}.label3d.negative{color:#1d6faf}.label3d.magnet{color:#b74747}.contactGlow{color:#10e69b}.running .status-chip span:first-child{background:#4de7b4}
 @media(max-width:950px){.read{min-width:76px}.read b{font-size:14px}}@media(max-width:620px){.read{min-width:0;padding:0 6px}.read b{font-size:12px}.modeBtns{grid-template-columns:repeat(3,minmax(0,1fr))}}@media(max-height:490px){.read b{font-size:12px}} 
 
+
+/* SR PHYSICS surgical UI additions — original 3D objects and physics unchanged. */
+#language{display:none!important}
+.sr-language-buttons{display:inline-flex;align-items:center;gap:2px;border:1px solid #cbdde3;background:#e4eef1;border-radius:11px;padding:3px;flex:none}
+.sr-language-buttons button{padding:0 9px;min-width:36px;height:32px;border:0;border-radius:8px;background:transparent;color:#507083;font-weight:900;font-size:11px;white-space:nowrap}
+.sr-language-buttons button.active{background:#102c3b;color:white;box-shadow:0 2px 7px #122b3e22}
+#srLabelsBtn{white-space:nowrap}
+#srLabelsBtn[aria-pressed="false"]{background:#ddeaf0;color:#526e7e}
+#workspace:fullscreen,#workspace:-webkit-full-screen{width:100vw!important;height:100dvh!important;max-width:none!important;margin:0!important;border:0!important;overflow:hidden!important;background:#edf6f9!important}
+#workspace:fullscreen .ambient-label,#workspace:fullscreen .status-chip,#workspace:fullscreen .readings,#workspace:fullscreen .hudNote,#workspace:fullscreen .cameraBar,#workspace:fullscreen .hintBar,#workspace:fullscreen .wavePanel,#workspace:fullscreen .turnRatio,#workspace:fullscreen .statusBar,#workspace:fullscreen .infoCard,#workspace:fullscreen .physicsNote,#workspace:fullscreen .toast,
+#workspace:-webkit-full-screen .ambient-label,#workspace:-webkit-full-screen .status-chip,#workspace:-webkit-full-screen .readings,#workspace:-webkit-full-screen .hudNote,#workspace:-webkit-full-screen .cameraBar,#workspace:-webkit-full-screen .hintBar,#workspace:-webkit-full-screen .wavePanel,#workspace:-webkit-full-screen .turnRatio{display:none!important}
+#srFsToolbar{display:none;position:absolute;top:10px;right:12px;z-index:30;gap:6px;align-items:center;padding:5px;background:#0b2536da;border:1px solid #ffffff59;border-radius:12px;backdrop-filter:blur(11px);box-shadow:0 8px 24px #0b25364a}
+#srFsToolbar button{height:34px;border-radius:8px;border:1px solid #ffffff3b;background:#ffffff1c;color:#fff;padding:0 10px;font-size:11px;font-weight:800;cursor:pointer;white-space:nowrap}
+#workspace:fullscreen #srFsToolbar,#workspace:-webkit-full-screen #srFsToolbar{display:flex}
+#workspace:fullscreen .drawer,#workspace:-webkit-full-screen .drawer{z-index:35}
+#workspace:fullscreen .darken,#workspace:-webkit-full-screen .darken,#workspace:fullscreen .drawerShade,#workspace:-webkit-full-screen .drawerShade{z-index:34}
+@media(max-width:950px){
+ .header{padding:0 7px!important;gap:6px!important}
+ .headerActions{gap:4px!important;flex-wrap:nowrap;min-width:0}
+ .sr-language-buttons{padding:2px;gap:0}
+ .sr-language-buttons button{font-size:10px;min-width:32px;height:29px;padding:0 6px}
+ #srLabelsBtn{font-size:10px;padding:0 7px;height:34px}
+ .headerActions .uiButton.primary{min-width:33px}
+}
+@media(max-width:670px){
+ .branding small{display:none!important}
+ .branding{min-width:0!important}
+ .headerActions>.uiButton:not(.square):not(.primary):not(#srLabelsBtn){padding:0 6px!important}
+ #srLabelsBtn{font-size:0!important;padding:0 7px!important}
+ #srLabelsBtn::before{content:'◈';font-size:17px}
+ .sr-language-buttons button{min-width:30px;font-size:9px;padding:0 5px}
+}
+@media(max-height:440px){#workspace:fullscreen #srFsToolbar{top:5px;right:5px;padding:3px}#srFsToolbar button{height:30px}}
+
 </style></head>
 <body><div class="app" id="app">
 <header class="header"><div class="branding"><div class="mark" id="brandMark"><img id="brandImg" src="https://srphysics.lk/logo1-mask.webp" alt="SR PHYSICS"><svg width="29" height="29" viewBox="0 0 32 32" aria-hidden="true"><path d="M10 7v12a6 6 0 0012 0V7" fill="none" stroke="#0a7287" stroke-width="5" stroke-linecap="round"/><path d="M8 7h5M19 7h5" stroke="#ed566b" stroke-width="4"/></svg></div><div><strong>SR PHYSICS</strong><small>NEXT GEN PHYSICS · SHAMIL RATHNAYAKE</small></div></div>
 <div class="heading"><strong id="pageTitle">3D Rotating-Coil Experiment · Continuous DC</strong><small id="pageSub">Two facing bar magnets · Uninterrupted current · Reversing torque</small></div>
-<div class="headerActions"><button class="uiButton primary" id="powerBtn"><span id="powerText">⏻ Switch ON</span></button><button class="uiButton" id="controlsBtn">☷ <span data-i="controls">Controls</span></button><select id="language" aria-label="Language"><option value="en">English</option><option value="si">සිංහල</option></select><button class="uiButton square" id="fullscreenBtn" title="Fullscreen">⛶</button></div></header>
+<div class="headerActions"><button class="uiButton primary" id="powerBtn"><span id="powerText">⏻ Switch ON</span></button><button class="uiButton" id="controlsBtn">☷ <span data-i="controls">Controls</span></button><button class="uiButton" type="button" id="srLabelsBtn" aria-label="Toggle apparatus labels" aria-pressed="true" title="Hide apparatus labels">◈ Labels</button><select id="language" aria-label="Language"><option value="en">English</option><option value="si">සිංහල</option></select><div class="sr-language-buttons" role="group" aria-label="Language"><button type="button" id="srLangEN" class="active" aria-pressed="true">EN</button><button type="button" id="srLangSI" aria-pressed="false">සිංහල</button></div><button class="uiButton square" id="fullscreenBtn" title="Fullscreen">⛶</button></div></header>
 <main class="workspace" id="workspace"><canvas id="scene" aria-label="3D motor apparatus with rotating copper coil between two opposed bar magnets, paperclip supports, battery, switch and connected wires"></canvas><canvas id="effectsCanvas" aria-hidden="true"></canvas><div id="apparatusLabels" aria-hidden="true"></div>
 <div class="ambient-label"><span><i class="liveDot"></i><span data-i="live">LIVE 3D LABORATORY</span></span><strong id="expName">THE TWO-BAR-MAGNET COIL MOTOR</strong><small id="instruction">Automatically swings back and forth through exactly 180°</small></div>
 <div class="status-chip" id="statusChip"><span></span><span id="statusText">CIRCUIT OPEN</span></div>
@@ -139,7 +173,7 @@ function room(){
  e.box(.06,2.4,.12,C.grey,[-3.6,2.4,-5.22]);e.box(3.96,.06,.12,C.grey,[-3.6,2.4,-5.22]);
  e.box(2.96,1.05,.56,[.53,.68,.73,1],[3.93,2.52,-5.15]);e.box(3.04,.10,.68,[.40,.53,.57,1],[3.93,1.96,-5.0]);
  for(let i=0;i<5;i++){let x=2.75+i*.53;e.cylinder(.08,.47,[.68,.89,.91,1],[x,2.32,-4.90]);e.cylinder(.05,.06,C.wood,[x,2.58,-4.90]);}
- e.box(3,.11,.52,[.78,.87,.88,1],[0,4.15,-1.0]);e.box(2.6,.016,.30,C.lamp,[0,4.08,-1.0],{emissive:.23});
+ /* Removed overhead light mesh to keep top-down view clear. *//* Removed overhead light mesh to keep top-down view clear. */
  for(let x=-4.8;x<=4.8;x+=.82)e.box(.009,.009,6.3,[.60,.40,.27,.24],[x,.009,.06]);
  // Model labels are overlaid separately; only physical apparatus occupies the bench.
 }
@@ -356,7 +390,7 @@ function pick(s){let point=e.rayAt(s.x,s.y,.43);if(!point)return '';let [x,,z]=p
 function contextOpen(x,y){let r=$('workspace').getBoundingClientRect();$('context').style.left=clamp(x-r.left+6,9,r.width-214)+'px';$('context').style.top=clamp(y-r.top+8,8,r.height-237)+'px';$('context').classList.add('visible');showingContext=true;}
 function contextClose(){$('context').classList.remove('visible');showingContext=false;}
 canvas.addEventListener('pointerdown',ev=>{if(ev.pointerType==='mouse'&&ev.button!==0)return;let s=screen(ev);contextClose();activePointers.set(ev.pointerId,s);try{canvas.setPointerCapture(ev.pointerId)}catch(_){ }if(activePointers.size>1){clearTimeout(longTimer);drag=null;let a=[...activePointers.values()];pinchDist=Math.hypot(a[0].x-a[1].x,a[0].y-a[1].y);return;}
- drag={id:ev.pointerId,start:s,last:s,moved:false,hit:pick(s)};clearTimeout(longTimer);longTimer=setTimeout(()=>{if(drag&&!drag.moved){contextOpen(ev.clientX,ev.clientY);drag.menu=true;}},570);});
+ drag={id:ev.pointerId,start:s,last:s,moved:false,hit:pick(s)};clearTimeout(longTimer);longTimer=setTimeout(()=>{if(drag&&!drag.moved){if(ev.pointerType==='touch'){$('controlsBtn').click();}else{contextOpen(ev.clientX,ev.clientY);}drag.menu=true;}},570);});
 canvas.addEventListener('pointermove',ev=>{let s=screen(ev);if(activePointers.has(ev.pointerId))activePointers.set(ev.pointerId,s);if(activePointers.size>=2){let a=[...activePointers.values()],newDist=Math.hypot(a[0].x-a[1].x,a[0].y-a[1].y);if(pinchDist>0&&newDist>0)e.radius=clamp(e.radius*pinchDist/newDist,4.7,22);pinchDist=newDist;return;}
  if(!drag||drag.id!==ev.pointerId||drag.menu)return;let dx=s.x-drag.last.x,dy=s.y-drag.last.y;if(Math.hypot(s.x-drag.start.x,s.y-drag.start.y)>8){drag.moved=true;clearTimeout(longTimer);}
  if(drag.moved){e.yaw-=dx*.0063;e.pitch=clamp(e.pitch+dy*.005,.13,1.55);document.querySelectorAll('[data-view]').forEach(b=>b.classList.remove('active'));}drag.last=s;});
@@ -399,4 +433,31 @@ room();buildBattery();buildSwitch();buildPaperclips();staticCables();buildMagnet
 window.SRMotorDebug={state,engine:e,current:physicalCurrent,torque,effectiveB,poleCoordinates,kick,setSwitch,reset,simStep:(dt)=>{stepPhysics(dt);poseRotor();measure();}};
 })();
 
-</script></body></html>
+</script>
+<script id="sr-interface-patch">
+/* Shared compact header features; original physics simulation code is untouched. */
+(() => {
+  'use strict';
+  const $ = id => document.getElementById(id);
+  const lang = $('language'), en = $('srLangEN'), si = $('srLangSI');
+  const syncLang = () => {const isSi=(lang?.value==='si'||document.documentElement.lang==='si');en.classList.toggle('active',!isSi);si.classList.toggle('active',isSi);en.setAttribute('aria-pressed',String(!isSi));si.setAttribute('aria-pressed',String(isSi));};
+  function selectLang(v){if(!lang)return;lang.value=v;lang.dispatchEvent(new Event('change',{bubbles:true}));syncLang();}
+  en.addEventListener('click',()=>selectLang('en'));si.addEventListener('click',()=>selectLang('si'));
+  if(lang)lang.addEventListener('change',syncLang);
+  new MutationObserver(syncLang).observe(document.documentElement,{attributes:true,attributeFilter:['lang']});syncLang();
+  const labels=$('showLabels'), btn=$('srLabelsBtn');
+  function syncLabels(){const visible=labels?.checked!==false;btn.setAttribute('aria-pressed',String(visible));btn.title=visible?'Hide apparatus labels':'Show apparatus labels';btn.textContent=visible?'◈ Labels':'◈ Labels off';const small=$('srFsLabels');if(small)small.textContent=visible?'Labels on':'Labels off';}
+  function toggleLabels(){if(!labels)return;labels.checked=!labels.checked;labels.dispatchEvent(new Event('change',{bubbles:true}));syncLabels();}
+  btn.addEventListener('click',toggleLabels);if(labels)labels.addEventListener('change',syncLabels);syncLabels();
+  const workspace=$('workspace'), fullscreen=$('fullscreenBtn');
+  const tools=document.createElement('div');tools.id='srFsToolbar';tools.innerHTML='<button type="button" id="srFsLabels" title="Toggle labels">Labels on</button><button type="button" id="srFsControls">Controls</button><button type="button" id="srFsExit">✕ Exit full screen</button>';
+  workspace.appendChild(tools);
+  $('srFsLabels').addEventListener('click',toggleLabels);
+  $('srFsControls').addEventListener('click',()=>{$('controlsBtn')?.click()});
+  $('srFsExit').addEventListener('click',()=>{if(document.fullscreenElement)document.exitFullscreen?.();});
+  /* Fullscreen only the 3D workspace: page header and other page elements cannot overlay it. */
+  if(fullscreen)fullscreen.onclick=async()=>{try{if(document.fullscreenElement)await document.exitFullscreen();else await workspace.requestFullscreen();}catch(error){console.warn('Fullscreen was unavailable:',error);}};
+  document.addEventListener('fullscreenchange',()=>{if(document.fullscreenElement===workspace){tools.style.display='flex'}else{tools.style.display=''}});
+})();
+</script>
+</body></html>

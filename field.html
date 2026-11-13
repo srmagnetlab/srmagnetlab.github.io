@@ -17,11 +17,45 @@
 @media(max-width:950px){.magnetButtons{grid-template-columns:repeat(3,minmax(0,1fr))}.read{min-width:70px}.headerActions #addBtn{padding:0 7px}}
 @media(max-width:620px){.headerActions #addBtn span{display:none}.headerActions #addBtn{font-size:20px}.readings{left:7px;right:auto;bottom:44px}.read{min-width:0;padding:0 7px}.status-chip{max-width:155px}.field-mark{font-size:7px;padding:2px 4px}}
 @media(max-height:490px){.readings{bottom:40px}.read{padding:0 6px}.read small{font-size:7px}.read b{font-size:13px}.ambient-label{max-width:180px}.cameraBar{z-index:5}}
+
+/* SR PHYSICS surgical UI additions — original 3D objects and physics unchanged. */
+#language{display:none!important}
+.sr-language-buttons{display:inline-flex;align-items:center;gap:2px;border:1px solid #cbdde3;background:#e4eef1;border-radius:11px;padding:3px;flex:none}
+.sr-language-buttons button{padding:0 9px;min-width:36px;height:32px;border:0;border-radius:8px;background:transparent;color:#507083;font-weight:900;font-size:11px;white-space:nowrap}
+.sr-language-buttons button.active{background:#102c3b;color:white;box-shadow:0 2px 7px #122b3e22}
+#srLabelsBtn{white-space:nowrap}
+#srLabelsBtn[aria-pressed="false"]{background:#ddeaf0;color:#526e7e}
+#workspace:fullscreen,#workspace:-webkit-full-screen{width:100vw!important;height:100dvh!important;max-width:none!important;margin:0!important;border:0!important;overflow:hidden!important;background:#edf6f9!important}
+#workspace:fullscreen .ambient-label,#workspace:fullscreen .status-chip,#workspace:fullscreen .readings,#workspace:fullscreen .hudNote,#workspace:fullscreen .cameraBar,#workspace:fullscreen .hintBar,#workspace:fullscreen .wavePanel,#workspace:fullscreen .turnRatio,#workspace:fullscreen .statusBar,#workspace:fullscreen .infoCard,#workspace:fullscreen .physicsNote,#workspace:fullscreen .toast,
+#workspace:-webkit-full-screen .ambient-label,#workspace:-webkit-full-screen .status-chip,#workspace:-webkit-full-screen .readings,#workspace:-webkit-full-screen .hudNote,#workspace:-webkit-full-screen .cameraBar,#workspace:-webkit-full-screen .hintBar,#workspace:-webkit-full-screen .wavePanel,#workspace:-webkit-full-screen .turnRatio{display:none!important}
+#srFsToolbar{display:none;position:absolute;top:10px;right:12px;z-index:30;gap:6px;align-items:center;padding:5px;background:#0b2536da;border:1px solid #ffffff59;border-radius:12px;backdrop-filter:blur(11px);box-shadow:0 8px 24px #0b25364a}
+#srFsToolbar button{height:34px;border-radius:8px;border:1px solid #ffffff3b;background:#ffffff1c;color:#fff;padding:0 10px;font-size:11px;font-weight:800;cursor:pointer;white-space:nowrap}
+#workspace:fullscreen #srFsToolbar,#workspace:-webkit-full-screen #srFsToolbar{display:flex}
+#workspace:fullscreen .drawer,#workspace:-webkit-full-screen .drawer{z-index:35}
+#workspace:fullscreen .darken,#workspace:-webkit-full-screen .darken,#workspace:fullscreen .drawerShade,#workspace:-webkit-full-screen .drawerShade{z-index:34}
+@media(max-width:950px){
+ .header{padding:0 7px!important;gap:6px!important}
+ .headerActions{gap:4px!important;flex-wrap:nowrap;min-width:0}
+ .sr-language-buttons{padding:2px;gap:0}
+ .sr-language-buttons button{font-size:10px;min-width:32px;height:29px;padding:0 6px}
+ #srLabelsBtn{font-size:10px;padding:0 7px;height:34px}
+ .headerActions .uiButton.primary{min-width:33px}
+}
+@media(max-width:670px){
+ .branding small{display:none!important}
+ .branding{min-width:0!important}
+ .headerActions>.uiButton:not(.square):not(.primary):not(#srLabelsBtn){padding:0 6px!important}
+ #srLabelsBtn{font-size:0!important;padding:0 7px!important}
+ #srLabelsBtn::before{content:'◈';font-size:17px}
+ .sr-language-buttons button{min-width:30px;font-size:9px;padding:0 5px}
+}
+@media(max-height:440px){#workspace:fullscreen #srFsToolbar{top:5px;right:5px;padding:3px}#srFsToolbar button{height:30px}}
+
 </style></head>
 <body><div class="app" id="app">
  <header class="header"><div class="branding"><div class="mark" id="brandMark"><img id="brandImg" src="https://srphysics.lk/logo1-mask.webp" alt="SR PHYSICS"><svg width="29" height="29" viewBox="0 0 32 32" aria-hidden="true"><path d="M10 7v12a6 6 0 0012 0V7" fill="none" stroke="#0a7287" stroke-width="5" stroke-linecap="round"/><path d="M8 7h5M19 7h5" stroke="#ed566b" stroke-width="4"/></svg></div><div><strong>SR PHYSICS</strong><small>NEXT GEN PHYSICS · SHAMIL RATHNAYAKE</small></div></div>
  <div class="heading"><strong id="pageTitle">3D Magnetic Field Laboratory</strong><small id="pageSub">Explore field lines, poles, attraction and repulsion</small></div>
- <div class="headerActions"><button class="uiButton" id="addBtn">＋ <span data-i="addMagnet">Magnet</span></button><button class="uiButton" id="controlsBtn">☷ <span data-i="controls">Controls</span></button><select id="language" aria-label="Language"><option value="en">English</option><option value="si">සිංහල</option></select><button class="uiButton square" id="fullscreenBtn" aria-label="Fullscreen">⛶</button></div></header>
+ <div class="headerActions"><button class="uiButton" id="addBtn">＋ <span data-i="addMagnet">Magnet</span></button><button class="uiButton" id="controlsBtn">☷ <span data-i="controls">Controls</span></button><button class="uiButton" type="button" id="srLabelsBtn" aria-label="Toggle apparatus labels" aria-pressed="true" title="Hide apparatus labels">◈ Labels</button><select id="language" aria-label="Language"><option value="en">English</option><option value="si">සිංහල</option></select><div class="sr-language-buttons" role="group" aria-label="Language"><button type="button" id="srLangEN" class="active" aria-pressed="true">EN</button><button type="button" id="srLangSI" aria-pressed="false">සිංහල</button></div><button class="uiButton square" id="fullscreenBtn" aria-label="Fullscreen">⛶</button></div></header>
  <main id="workspace" class="workspace"><canvas id="scene" aria-label="3D magnetic field apparatus. Drag magnets to reposition them."></canvas><canvas id="fluxCanvas" aria-label="Magnetic field lines and animation" style="pointer-events:none"></canvas><div id="fieldLabels" aria-hidden="true"></div>
  <div class="ambient-label"><span><i class="liveDot"></i><span id="labLabel">LIVE 3D LABORATORY</span></span><strong id="expName">MAGNETIC FIELD EXPLORER</strong><small id="instruction">Drag a magnet · Long-press for more options</small></div>
  <div class="status-chip"><span></span><span id="magnetCount">1 MAGNET ON THE TABLE</span></div>
@@ -133,7 +167,7 @@ function room(){
  e.box(.06,2.43,.12,C.steel,[-3.62,2.4,-5.19]);e.box(4.28,.06,.13,C.steel,[-3.62,2.4,-5.19]);
  e.box(3.1,1.05,.56,[.56,.69,.72,1],[3.89,2.47,-5.15]);e.box(3.24,.09,.75,[.42,.55,.6,1],[3.89,1.9,-4.95]);
  for(let i=0;i<5;i++){let x=2.7+i*.58;e.cylinder(.085,.5,[.71,.88,.91,1],[x,2.3,-4.92]);e.cylinder(.05,.07,C.wood,[x,2.6,-4.92]);}
- e.box(2.98,.11,.52,[.80,.85,.86,1],[0,4.1,-.7]);e.box(2.5,.014,.31,[1,1,.92,1],[0,4.02,-.7],{emissive:.4});
+ /* Removed overhead light mesh to keep top-down view clear. *//* Removed overhead light mesh to keep top-down view clear. */
  for(let x=-4.8;x<5;x+=.92)e.box(.013,.007,6.25,[.66,.44,.29,.24],[x,.029,.05]);
  // Equipment shelf on the left edge of the desk.
  e.box(1.25,.1,1.4,C.chrome,[-4.35,.38,-1.75]);
@@ -292,7 +326,7 @@ function pickAt(sx,sy){const w=e.rayAt(sx,sy,.31);if(w){for(let i=magnets.length
 function screenPointer(ev){const r=canvas.getBoundingClientRect();return {x:ev.clientX-r.left,y:ev.clientY-r.top};}
 let longFired=false;
 canvas.addEventListener('pointerdown',ev=>{if(ev.pointerType==='mouse'&&ev.button!==0)return;const s=screenPointer(ev);contextClose();touches.set(ev.pointerId,s);try{canvas.setPointerCapture(ev.pointerId);}catch(_){ }if(touches.size>1){clearTimeout(longTimer);drag=null;const a=[...touches.values()];prevPinch=Math.hypot(a[0].x-a[1].x,a[0].y-a[1].y);return;}
- const hit=pickAt(s.x,s.y),world=e.rayAt(s.x,s.y,.31);longFired=false;drag={id:ev.pointerId,sx:s.x,sy:s.y,lx:s.x,ly:s.y,started:false,mode:hit?hit.type:'orbit',hit,obj:hit?.obj,offset:world&&hit?.type==='magnet'?[world[0]-hit.obj.x,world[2]-hit.obj.z]:[0,0]};canvas.classList.add('dragging');longTimer=setTimeout(()=>{if(drag&&!drag.started){longFired=true;contextOpen(ev.clientX,ev.clientY,hit?.type||'empty',hit?.obj);drag.mode='menu';}},570);});
+ const hit=pickAt(s.x,s.y),world=e.rayAt(s.x,s.y,.31);longFired=false;drag={id:ev.pointerId,sx:s.x,sy:s.y,lx:s.x,ly:s.y,started:false,mode:hit?hit.type:'orbit',hit,obj:hit?.obj,offset:world&&hit?.type==='magnet'?[world[0]-hit.obj.x,world[2]-hit.obj.z]:[0,0]};canvas.classList.add('dragging');longTimer=setTimeout(()=>{if(drag&&!drag.started){longFired=true;if(ev.pointerType==='touch'){$('controlsBtn').click();}else{contextOpen(ev.clientX,ev.clientY,hit?.type||'empty',hit?.obj);}drag.mode='menu';}},570);});
 canvas.addEventListener('pointermove',ev=>{const s=screenPointer(ev);if(touches.has(ev.pointerId))touches.set(ev.pointerId,s);if(touches.size>1){let pts=[...touches.values()],d=Math.hypot(pts[0].x-pts[1].x,pts[0].y-pts[1].y);if(prevPinch&&d>9)e.radius=clamp(e.radius*(prevPinch/d),5,23);prevPinch=d;return;}
  if(!drag||drag.id!==ev.pointerId)return;let dist=Math.hypot(s.x-drag.sx,s.y-drag.sy);if(dist>8){clearTimeout(longTimer);drag.started=true;}if(drag.mode==='menu')return;
  if(drag.mode==='magnet'&&drag.started){let world=e.rayAt(s.x,s.y,.31);if(world){let m=drag.obj;m.x=clamp(world[0]-drag.offset[0],-3.9,3.9);m.z=clamp(world[2]-drag.offset[1],-2.25,2.35);updateMagnet(m);}}
@@ -339,4 +373,31 @@ function loop(now){requestAnimationFrame(loop);if(now-lastPaint<32)return;lastPa
 try{room();makeMagnet('bar',0,-.18);makeProbe(2.2,1.2);refresh();setLanguage('en');syncSliders();window.SR_FIELD_TEST={state:st,getMagnets:()=>magnets,probes,getField,polePositions,getPaths:()=>paths,engine:e,preset,rebuild:()=>buildPaths(), add:appendMagnet};requestAnimationFrame(loop);}catch(err){console.error('Magnetic field lab:',err);$('expName').textContent='3D ERROR: '+err.message;}
 })();
 </script>
- </body></html>
+ 
+<script id="sr-interface-patch">
+/* Shared compact header features; original physics simulation code is untouched. */
+(() => {
+  'use strict';
+  const $ = id => document.getElementById(id);
+  const lang = $('language'), en = $('srLangEN'), si = $('srLangSI');
+  const syncLang = () => {const isSi=(lang?.value==='si'||document.documentElement.lang==='si');en.classList.toggle('active',!isSi);si.classList.toggle('active',isSi);en.setAttribute('aria-pressed',String(!isSi));si.setAttribute('aria-pressed',String(isSi));};
+  function selectLang(v){if(!lang)return;lang.value=v;lang.dispatchEvent(new Event('change',{bubbles:true}));syncLang();}
+  en.addEventListener('click',()=>selectLang('en'));si.addEventListener('click',()=>selectLang('si'));
+  if(lang)lang.addEventListener('change',syncLang);
+  new MutationObserver(syncLang).observe(document.documentElement,{attributes:true,attributeFilter:['lang']});syncLang();
+  const labels=$('showLabels'), btn=$('srLabelsBtn');
+  function syncLabels(){const visible=labels?.checked!==false;btn.setAttribute('aria-pressed',String(visible));btn.title=visible?'Hide apparatus labels':'Show apparatus labels';btn.textContent=visible?'◈ Labels':'◈ Labels off';const small=$('srFsLabels');if(small)small.textContent=visible?'Labels on':'Labels off';}
+  function toggleLabels(){if(!labels)return;labels.checked=!labels.checked;labels.dispatchEvent(new Event('change',{bubbles:true}));syncLabels();}
+  btn.addEventListener('click',toggleLabels);if(labels)labels.addEventListener('change',syncLabels);syncLabels();
+  const workspace=$('workspace'), fullscreen=$('fullscreenBtn');
+  const tools=document.createElement('div');tools.id='srFsToolbar';tools.innerHTML='<button type="button" id="srFsLabels" title="Toggle labels">Labels on</button><button type="button" id="srFsControls">Controls</button><button type="button" id="srFsExit">✕ Exit full screen</button>';
+  workspace.appendChild(tools);
+  $('srFsLabels').addEventListener('click',toggleLabels);
+  $('srFsControls').addEventListener('click',()=>{$('controlsBtn')?.click()});
+  $('srFsExit').addEventListener('click',()=>{if(document.fullscreenElement)document.exitFullscreen?.();});
+  /* Fullscreen only the 3D workspace: page header and other page elements cannot overlay it. */
+  if(fullscreen)fullscreen.onclick=async()=>{try{if(document.fullscreenElement)await document.exitFullscreen();else await workspace.requestFullscreen();}catch(error){console.warn('Fullscreen was unavailable:',error);}};
+  document.addEventListener('fullscreenchange',()=>{if(document.fullscreenElement===workspace){tools.style.display='flex'}else{tools.style.display=''}});
+})();
+</script>
+</body></html>

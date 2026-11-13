@@ -23,9 +23,43 @@
 @media(max-width:950px){.read{min-width:79px}.ambient-label{max-width:188px}.hudNote{display:none}.readings{bottom:53px}}@media(max-width:620px){.read{min-width:0;padding:0 6px}.read b{font-size:12px}}@media(max-height:490px){.readings{bottom:39px}.ambient-label{max-width:175px}} 
 
 .mark .logoText{font-weight:950;font-size:14px;letter-spacing:-.07em;color:#076c81}.mark.success .logoText{display:none}
+
+/* SR PHYSICS surgical UI additions — original 3D objects and physics unchanged. */
+#language{display:none!important}
+.sr-language-buttons{display:inline-flex;align-items:center;gap:2px;border:1px solid #cbdde3;background:#e4eef1;border-radius:11px;padding:3px;flex:none}
+.sr-language-buttons button{padding:0 9px;min-width:36px;height:32px;border:0;border-radius:8px;background:transparent;color:#507083;font-weight:900;font-size:11px;white-space:nowrap}
+.sr-language-buttons button.active{background:#102c3b;color:white;box-shadow:0 2px 7px #122b3e22}
+#srLabelsBtn{white-space:nowrap}
+#srLabelsBtn[aria-pressed="false"]{background:#ddeaf0;color:#526e7e}
+#workspace:fullscreen,#workspace:-webkit-full-screen{width:100vw!important;height:100dvh!important;max-width:none!important;margin:0!important;border:0!important;overflow:hidden!important;background:#edf6f9!important}
+#workspace:fullscreen .ambient-label,#workspace:fullscreen .status-chip,#workspace:fullscreen .readings,#workspace:fullscreen .hudNote,#workspace:fullscreen .cameraBar,#workspace:fullscreen .hintBar,#workspace:fullscreen .wavePanel,#workspace:fullscreen .turnRatio,#workspace:fullscreen .statusBar,#workspace:fullscreen .infoCard,#workspace:fullscreen .physicsNote,#workspace:fullscreen .toast,
+#workspace:-webkit-full-screen .ambient-label,#workspace:-webkit-full-screen .status-chip,#workspace:-webkit-full-screen .readings,#workspace:-webkit-full-screen .hudNote,#workspace:-webkit-full-screen .cameraBar,#workspace:-webkit-full-screen .hintBar,#workspace:-webkit-full-screen .wavePanel,#workspace:-webkit-full-screen .turnRatio{display:none!important}
+#srFsToolbar{display:none;position:absolute;top:10px;right:12px;z-index:30;gap:6px;align-items:center;padding:5px;background:#0b2536da;border:1px solid #ffffff59;border-radius:12px;backdrop-filter:blur(11px);box-shadow:0 8px 24px #0b25364a}
+#srFsToolbar button{height:34px;border-radius:8px;border:1px solid #ffffff3b;background:#ffffff1c;color:#fff;padding:0 10px;font-size:11px;font-weight:800;cursor:pointer;white-space:nowrap}
+#workspace:fullscreen #srFsToolbar,#workspace:-webkit-full-screen #srFsToolbar{display:flex}
+#workspace:fullscreen .drawer,#workspace:-webkit-full-screen .drawer{z-index:35}
+#workspace:fullscreen .darken,#workspace:-webkit-full-screen .darken,#workspace:fullscreen .drawerShade,#workspace:-webkit-full-screen .drawerShade{z-index:34}
+@media(max-width:950px){
+ .header{padding:0 7px!important;gap:6px!important}
+ .headerActions{gap:4px!important;flex-wrap:nowrap;min-width:0}
+ .sr-language-buttons{padding:2px;gap:0}
+ .sr-language-buttons button{font-size:10px;min-width:32px;height:29px;padding:0 6px}
+ #srLabelsBtn{font-size:10px;padding:0 7px;height:34px}
+ .headerActions .uiButton.primary{min-width:33px}
+}
+@media(max-width:670px){
+ .branding small{display:none!important}
+ .branding{min-width:0!important}
+ .headerActions>.uiButton:not(.square):not(.primary):not(#srLabelsBtn){padding:0 6px!important}
+ #srLabelsBtn{font-size:0!important;padding:0 7px!important}
+ #srLabelsBtn::before{content:'◈';font-size:17px}
+ .sr-language-buttons button{min-width:30px;font-size:9px;padding:0 5px}
+}
+@media(max-height:440px){#workspace:fullscreen #srFsToolbar{top:5px;right:5px;padding:3px}#srFsToolbar button{height:30px}}
+
 </style></head>
 <body><div class="app" id="app"><header class="header"><div class="branding"><div class="mark" id="brandMark"><img id="brandImg" src="https://srphysics.lk/logo1-mask.webp" alt="SR PHYSICS logo"><span class="logoText" aria-hidden="true">SR</span></div><div><strong>SR PHYSICS</strong><small>NEXT GEN PHYSICS · SHAMIL RATHNAYAKE</small></div></div>
-<div class="heading"><strong id="pageTitle">Maxwell's Screw Rule · 3D Experiment</strong><small id="pageSub">Straight conductor · Circular magnetic field · Screw rotation</small></div><div class="headerActions"><button class="uiButton primary" id="powerBtn">⏻ <span id="powerText">Switch OFF</span></button><button class="uiButton" id="controlsBtn">☷ <span data-i="controls">Controls</span></button><select id="language" aria-label="Language"><option value="en">English</option><option value="si">සිංහල</option></select><button class="uiButton square" id="fullscreenBtn" title="Fullscreen">⛶</button></div></header>
+<div class="heading"><strong id="pageTitle">Maxwell's Screw Rule · 3D Experiment</strong><small id="pageSub">Straight conductor · Circular magnetic field · Screw rotation</small></div><div class="headerActions"><button class="uiButton primary" id="powerBtn">⏻ <span id="powerText">Switch OFF</span></button><button class="uiButton" id="controlsBtn">☷ <span data-i="controls">Controls</span></button><button class="uiButton" type="button" id="srLabelsBtn" aria-label="Toggle apparatus labels" aria-pressed="true" title="Hide apparatus labels">◈ Labels</button><select id="language" aria-label="Language"><option value="en">English</option><option value="si">සිංහල</option></select><div class="sr-language-buttons" role="group" aria-label="Language"><button type="button" id="srLangEN" class="active" aria-pressed="true">EN</button><button type="button" id="srLangSI" aria-pressed="false">සිංහල</button></div><button class="uiButton square" id="fullscreenBtn" title="Fullscreen">⛶</button></div></header>
 <main class="workspace" id="workspace"><canvas id="scene" aria-label="Interactive 3D Maxwell screw-rule laboratory with an upright copper conductor and connected DC power circuit"></canvas><canvas id="overlay" aria-hidden="true"></canvas><div id="apparatusLabels" aria-hidden="true"></div>
 <div class="ambient-label"><span><i class="liveDot"></i><span data-i="live">LIVE 3D PHYSICS LAB</span></span><strong id="expName">MAXWELL'S SCREW RULE</strong><small id="instruction">Rotate a right-handed screw: field rotation and current are linked.</small></div><div class="status-chip" id="statusChip"><span></span><span id="statusText">CURRENT FLOWING ↑</span></div>
 <div class="readings"><div class="read"><small data-i="current">CURRENT</small><b id="currentOut">4.00 A</b></div><div class="read"><small data-i="field">FIELD AT PROBE</small><b id="fieldOut">10.0 μT</b></div><div class="read"><small data-i="distance">PROBE RADIUS</small><b id="radiusOut">8.0 cm</b></div><div class="read"><small data-i="direction">FIELD DIRECTION</small><b id="directionOut">↺ CCW</b></div></div>
@@ -121,7 +155,7 @@ function smooth(a,n=9){return P.smoothPath(a,n)}
 function shadow(x,z,rx,rz){for(let k=1;k<=3;k++){let p=eng.part(eng.get('cylinder',1,.009,30),[.08,.17,.24,(4-k)*.033],{model:P.multiply(P.translation(x,.012+k*.006,z),P.scaling(rx*k/3,.2,rz*k/3))});shadowParts.push(p);p.visible=state.shadows;}}
 function room(){eng.box(12,.22,7.4,C.table,[0,-.16,0]);eng.box(12.1,.14,7.50,C.trim,[0,-.29,0]);for(let x of [-5.4,5.4])for(let z of [-3.1,3.1])eng.box(.29,1.6,.29,C.steel,[x,-1.07,z]);
  eng.box(18,.1,14,[.76,.85,.88,1],[0,-2.01,-.35]);eng.box(16,8,.13,[.82,.91,.94,1],[0,2.2,-5.8]);eng.box(3.7,2.55,.10,[.50,.68,.75,1],[-3.9,2.7,-5.67]);eng.box(3.58,2.41,.025,[.81,.92,.94,1],[-3.9,2.7,-5.58]);eng.box(2.96,1.0,.6,[.62,.75,.79,1],[4.2,2.72,-5.4]);eng.box(3.05,.10,.70,[.43,.58,.64,1],[4.2,2.19,-5.23]);for(let i=0;i<5;i++){eng.cylinder(.08,.46,[.62,.86,.89,1],[2.95+i*.59,2.55,-5.1]);eng.cylinder(.09,.08,[.24,.48,.57,1],[2.95+i*.59,2.8,-5.1]);}
- eng.box(3,.10,.48,[.80,.86,.87,1],[0,4.2,-.8]);eng.box(2.7,.025,.35,[1,1,1,1],[0,4.14,-.8],{emissive:.13});}
+ /* Removed overhead light mesh to keep top-down view clear. *//* Removed overhead light mesh to keep top-down view clear. */}
 function power(){shadow(-3.25,-1.30,1.08,.73);eng.box(1.8,.86,1.10,[.19,.30,.36,1],[-3.25,.48,-1.35]);eng.box(1.72,.77,.035,[.26,.38,.45,1],[-3.25,.48,-.77]);eng.box(.72,.32,.044,[.07,.13,.17,1],[-3.42,.62,-.742]);eng.box(.50,.20,.050,[.09,.52,.40,1],[-3.42,.62,-.71],{emissive:.15});for(let x of [-3.8,-2.85]){eng.cylinder(.13,.12,C.gold,[x,.43,-.67],{rotation:P.rotationX(Math.PI/2)});eng.sphere(.10,x===-2.85?C.red:C.black,[x,.43,-.54]);}for(let x of [-3.83,-2.66])eng.cylinder(.085,.08,C.chrome,[x,.78,-.84]);}
 const pinPos=[-2.85,.43,-.54],pinNeg=[-3.8,.43,-.54],wireBottom=[0,.70,0],wireTop=[0,3.28,0],switchA=[2.15,.38,-1.62],switchB=[2.89,.38,-1.62];
 function buildSwitch(){shadow(2.53,-1.62,.95,.42);eng.box(1.15,.15,.69,[.53,.39,.23,1],[2.54,.13,-1.62]);for(let p of [switchA,switchB]){eng.cylinder(.10,.16,C.chrome,[p[0],.24,p[2]]);eng.sphere(.10,C.gold,p);}updateSwitch();}
@@ -195,7 +229,7 @@ function contextOpen(x,y){const r=$('workspace').getBoundingClientRect();$('cont
 function contextClose(){$('context').classList.remove('visible');}
 $('ctxClose').onclick=contextClose;for(const el of document.querySelectorAll('[data-action]'))el.onclick=()=>{const act=el.dataset.action;contextClose();if(act==='switch')setSwitch();if(act==='reverse')reverse();if(act==='top')camera('top');if(act==='controls')$('controlsBtn').click();};
 function moveProbeAt(s){let p=eng.rayAt(s.x,s.y,.89);if(!p||!Number.isFinite(p[0]))return;const r=Math.hypot(p[0],p[2]);state.probeAngle=Math.atan2(-p[2],p[0]);state.probeRadius=clamp((r-.20)/.068,2,24);$('probeRadius').value=state.probeRadius;syncControls();}
-canvas.addEventListener('pointerdown',ev=>{if(ev.pointerType==='mouse'&&ev.button!==0)return;let s=sxy(ev);contextClose();ptr.set(ev.pointerId,s);try{canvas.setPointerCapture(ev.pointerId)}catch(_){ }if(ptr.size>=2){drag=null;clearTimeout(longTimer);const p=[...ptr.values()];pinch=Math.hypot(p[0].x-p[1].x,p[0].y-p[1].y);return;}let probe=probeScreen(),hitProbe=state.probe&&probe&&Math.hypot(s.x-probe.x,s.y-probe.y)<38;drag={id:ev.pointerId,start:s,last:s,moved:false,hitProbe,menu:false};clearTimeout(longTimer);longTimer=setTimeout(()=>{if(drag&&!drag.moved){contextOpen(ev.clientX,ev.clientY);drag.menu=true;}},575);});
+canvas.addEventListener('pointerdown',ev=>{if(ev.pointerType==='mouse'&&ev.button!==0)return;let s=sxy(ev);contextClose();ptr.set(ev.pointerId,s);try{canvas.setPointerCapture(ev.pointerId)}catch(_){ }if(ptr.size>=2){drag=null;clearTimeout(longTimer);const p=[...ptr.values()];pinch=Math.hypot(p[0].x-p[1].x,p[0].y-p[1].y);return;}let probe=probeScreen(),hitProbe=state.probe&&probe&&Math.hypot(s.x-probe.x,s.y-probe.y)<38;drag={id:ev.pointerId,start:s,last:s,moved:false,hitProbe,menu:false};clearTimeout(longTimer);longTimer=setTimeout(()=>{if(drag&&!drag.moved){if(ev.pointerType==='touch'){$('controlsBtn').click();}else{contextOpen(ev.clientX,ev.clientY);}drag.menu=true;}},575);});
 canvas.addEventListener('pointermove',ev=>{const s=sxy(ev);if(ptr.has(ev.pointerId))ptr.set(ev.pointerId,s);if(ptr.size>=2){const p=[...ptr.values()],d=Math.hypot(p[0].x-p[1].x,p[0].y-p[1].y);if(pinch>0&&d>0)eng.radius=clamp(eng.radius*pinch/d,4.7,27);pinch=d;return;}if(!drag||drag.id!==ev.pointerId||drag.menu)return;let dx=s.x-drag.last.x,dy=s.y-drag.last.y;if(Math.hypot(s.x-drag.start.x,s.y-drag.start.y)>8){drag.moved=true;clearTimeout(longTimer);}if(drag.moved){if(drag.hitProbe)moveProbeAt(s);else{eng.yaw-=dx*.0061;eng.pitch=clamp(eng.pitch+dy*.0053,.16,1.57);document.querySelectorAll('[data-view]').forEach(b=>b.classList.remove('active'));}}drag.last=s;});
 function release(ev){ptr.delete(ev.pointerId);if(ptr.size<2)pinch=null;if(!drag||drag.id!==ev.pointerId)return;clearTimeout(longTimer);if(!drag.moved&&!drag.menu&&drag.hitProbe)toast('Drag the compass to measure B at a new distance');drag=null;}
 canvas.addEventListener('pointerup',release);canvas.addEventListener('pointercancel',release);canvas.addEventListener('wheel',ev=>{ev.preventDefault();eng.radius=clamp(eng.radius*Math.exp(ev.deltaY*.001),4.7,27);},{passive:false});canvas.addEventListener('contextmenu',ev=>{ev.preventDefault();contextOpen(ev.clientX,ev.clientY);});
@@ -205,4 +239,31 @@ function frame(t){let dt=last?Math.min(.05,(t-last)/1000):.016;last=t;const mini
 room();power();buildSwitch();conductor();buildWires();buildRings();buildCurrentParticles();buildProbe();screw();annotations();camera('iso');syncControls();requestAnimationFrame(frame);
 window.SRMaxwellDebug={state,current:actualI,fieldMicroTesla:microTesla,engine:eng,reverse,setSwitch,reset,probePos};
 })();
-</script></body></html>
+</script>
+<script id="sr-interface-patch">
+/* Shared compact header features; original physics simulation code is untouched. */
+(() => {
+  'use strict';
+  const $ = id => document.getElementById(id);
+  const lang = $('language'), en = $('srLangEN'), si = $('srLangSI');
+  const syncLang = () => {const isSi=(lang?.value==='si'||document.documentElement.lang==='si');en.classList.toggle('active',!isSi);si.classList.toggle('active',isSi);en.setAttribute('aria-pressed',String(!isSi));si.setAttribute('aria-pressed',String(isSi));};
+  function selectLang(v){if(!lang)return;lang.value=v;lang.dispatchEvent(new Event('change',{bubbles:true}));syncLang();}
+  en.addEventListener('click',()=>selectLang('en'));si.addEventListener('click',()=>selectLang('si'));
+  if(lang)lang.addEventListener('change',syncLang);
+  new MutationObserver(syncLang).observe(document.documentElement,{attributes:true,attributeFilter:['lang']});syncLang();
+  const labels=$('showLabels'), btn=$('srLabelsBtn');
+  function syncLabels(){const visible=labels?.checked!==false;btn.setAttribute('aria-pressed',String(visible));btn.title=visible?'Hide apparatus labels':'Show apparatus labels';btn.textContent=visible?'◈ Labels':'◈ Labels off';const small=$('srFsLabels');if(small)small.textContent=visible?'Labels on':'Labels off';}
+  function toggleLabels(){if(!labels)return;labels.checked=!labels.checked;labels.dispatchEvent(new Event('change',{bubbles:true}));syncLabels();}
+  btn.addEventListener('click',toggleLabels);if(labels)labels.addEventListener('change',syncLabels);syncLabels();
+  const workspace=$('workspace'), fullscreen=$('fullscreenBtn');
+  const tools=document.createElement('div');tools.id='srFsToolbar';tools.innerHTML='<button type="button" id="srFsLabels" title="Toggle labels">Labels on</button><button type="button" id="srFsControls">Controls</button><button type="button" id="srFsExit">✕ Exit full screen</button>';
+  workspace.appendChild(tools);
+  $('srFsLabels').addEventListener('click',toggleLabels);
+  $('srFsControls').addEventListener('click',()=>{$('controlsBtn')?.click()});
+  $('srFsExit').addEventListener('click',()=>{if(document.fullscreenElement)document.exitFullscreen?.();});
+  /* Fullscreen only the 3D workspace: page header and other page elements cannot overlay it. */
+  if(fullscreen)fullscreen.onclick=async()=>{try{if(document.fullscreenElement)await document.exitFullscreen();else await workspace.requestFullscreen();}catch(error){console.warn('Fullscreen was unavailable:',error);}};
+  document.addEventListener('fullscreenchange',()=>{if(document.fullscreenElement===workspace){tools.style.display='flex'}else{tools.style.display=''}});
+})();
+</script>
+</body></html>
